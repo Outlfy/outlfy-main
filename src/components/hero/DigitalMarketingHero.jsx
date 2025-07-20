@@ -1,3 +1,4 @@
+"use client";
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { SplitText } from "@/plugins";
@@ -53,18 +54,30 @@ const DigitalMarketingHero = () => {
     let headerArea = document.querySelector(".header__area-3");
     let video = videoTitle.current;
     let videoClose = videoCloseSection.current;
+    let heroContent = document.querySelector(".hero__inner-3");
+    let heroImage = document.querySelector(".hero3-img-ani");
+    
     if (videoCheck.current.checked) {
       wrapper.current.style.zIndex = "1";
       video.style.display = "none";
       videoClose.style.display = "block";
       heroArea.current.classList.add("start-video");
       headerArea.classList.add("bg-white");
+      
+      // Fade out content
+      if (heroContent) heroContent.style.opacity = "0.1";
+      if (heroImage) heroImage.style.opacity = "0.1";
+      
     } else {
       wrapper.current.style.zIndex = "999";
       video.style.display = "block";
       videoClose.style.display = "none";
       heroArea.current.classList.remove("start-video");
       headerArea.classList.remove("bg-white");
+      
+      // Fade in content
+      if (heroContent) heroContent.style.opacity = "1";
+      if (heroImage) heroImage.style.opacity = "1";
     }
   };
   return (
@@ -73,7 +86,7 @@ const DigitalMarketingHero = () => {
         <div className="container">
           <div className="row">
             <div className="col-xxl-12">
-              <div className="hero__inner-3">                <div className="sec-title-wrapper">
+              <div className="hero__inner-3" style={{ transition: "opacity 0.5s ease-in-out" }}>                <div className="sec-title-wrapper">
                 <h2 className="sec-sub-title">YOUR</h2>
                 <h3 className="sec-title title-left" ref={titleLeft}>
                   TECH
@@ -135,7 +148,7 @@ const DigitalMarketingHero = () => {
           </div>
         </div>
 
-        <div className="hero3-img-ani">
+        <div className="hero3-img-ani" style={{ transition: "opacity 0.5s ease-in-out" }}>
           <Image
             priority
             width={1195}

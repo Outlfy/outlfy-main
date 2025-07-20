@@ -95,15 +95,16 @@ const ServiceHero = () => {
             </div>
           </div>
 
-          <div className="solution__mid">
-            <h1 className="solution__title animation__char_come" ref={charAnim}>
-              Digital Solution
-            </h1>
-            <p>
-              We’re designing digital experiences that enrich human lives and it
-              helps to grow your business globally trends.
-            </p>
-          </div>
+            <div className="solution__mid">
+              <h1 className="solution__title animation__char_come" ref={charAnim}>
+                Easy E-Commerce
+              </h1>
+              <p>
+                We build your unique online store + app, then hand you full
+                control. Change any text, image, or price in seconds—no tech
+                skills needed. Save thousands on developer bills.
+              </p>
+            </div>
 
           <div className="solution__right">
             <div className="solution__img-3">

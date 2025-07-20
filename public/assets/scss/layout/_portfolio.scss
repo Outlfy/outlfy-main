@@ -273,7 +273,7 @@
         }
 
         @media #{$sm} {
-          left: -22px;
+          right:0px;
           padding-top: 10px;
         }
 
@@ -730,7 +730,7 @@
 
     &-3 {
       font-weight: 500;
-      font-size: 180px;
+      font-size: 120px;
       line-height: 1;
       text-transform: uppercase;
       color: var(--white);
@@ -759,6 +759,7 @@
         height: 100%;
         flex-direction: column;
         justify-content: center;
+        margin-top: 40px;
       }
 
       span {

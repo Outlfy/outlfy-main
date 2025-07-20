@@ -1,3 +1,4 @@
+"use client";
 import { useEffect, useRef } from "react";
 import Link from "next/link.js";
 import Award from "../../../public/assets/imgs/about/award.png";
@@ -18,18 +19,17 @@ const AboutHero = () => {
             <div className="col-xxl-12">
               <div className="hero__about-content">
                 <h1 className="hero-title animation__word_come" ref={wordAnim}>
-                  We’re a full service creative and digital agency, working
-                  globally with leargest brands.
+                  Tech Partners, Not Vendors:<br/> We Build Ecosystems That Scale With You
                 </h1>
                 <div className="hero__about-info">
                   <div className="hero__about-btn">
                     <div className="btn_wrapper">
                       <Link
-                        href="/service"
+                        href="/contact"
                         className="wc-btn-primary btn-hover btn-item"
                       >
-                        <span></span> Trends & <br />
-                        technology
+                        <span></span> Book Your Free <br />
+                        Tech Roadmap
                         <i className="fa-solid fa-arrow-right"></i>
                       </Link>
                     </div>
@@ -37,7 +37,7 @@ const AboutHero = () => {
                   <div className="hero__about-text title-anim">
                     <p>
                       {
-                        "Think of the world's most iconica and successful brands easily findable, impactful. Interactional and exceptional designs. Our story takes beginning in 2013"
+                        "Outlfy isn't just a tech company—we're your strategic growth ally. Since 2023, we've empowered startups and enterprises to cut costs, automate workflows, and turn data into profit."
                       }
                     </p>
                   </div>

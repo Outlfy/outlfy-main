@@ -1,4 +1,5 @@
-import ServiceDetail from "../../../public/assets/imgs/thumb/service-detail.png";
+"use client";
+import ServiceDetail from "../../../public/assets/imgs/techa_3.png";
 import Shape6 from "../../../public/assets/imgs/icon/shape-6.png";
 import Image from "next/image";
 
@@ -10,10 +11,8 @@ const ServiceDetailsService = () => {
           <div className="line-3"></div>
           <div className="row">
             <div className="col-xxl-12">
-              <div className="sec-title-wrapper">
-                <h2 className="sec-title title-anim">
-                  We replace unreliable wirefreme and expensive agencies for one
-                  of the best organized layer.
+              <div className="sec-title-wrapper">                <h2 className="sec-title title-anim">
+                  From Cost Chaos to Strategic Clarity — We transform complex data into actionable intelligence within 72 hours.
                 </h2>
               </div>
             </div>
@@ -39,18 +38,12 @@ const ServiceDetailsService = () => {
                   alt="Service shape image"
                   className="sd-shape"
                 />
-              </div>
-              <div className="service__detail-content">
+              </div>              <div className="service__detail-content">
                 <p>
-                  {
-                    "Receive your design within a few business days, and be updated on the process. Everything you need for a digitally driven brand. Defined proposition. Conceptual realisation. Logo, type, look, feel, tone, movement, content - we've got it covered."
-                  }
+                  Traditional tech audits drown you in generic recommendations. We deliver a visual Profit Blueprint that transforms complex data into actionable intelligence. Within 72 hours, you'll see precisely where resources vanish, how workflows stall growth, and which solutions deliver maximum ROI – all mapped to your unique business goals.
                 </p>
                 <p>
-                  Getting your brand message out there. We create dynamic
-                  campaign creative that engages audiences, wherever they are
-                  most talented. Bring your brand to life, communicate your
-                  value proposition with agile setup across creativity.
+                  We dissect your entire tech ecosystem – software subscriptions, infrastructure costs, and operational overhead – to build a clear financial map showing exactly where money disappears and why. Every recommendation prioritizes solutions that don't just cut expenses but actively fuel revenue generation and market expansion.
                 </p>
               </div>
             </div>

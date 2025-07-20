@@ -964,7 +964,6 @@
 
   &__content {
     &-3 {
-      max-width: 340px;
       @include zi(1);
 
       @media #{$lg} {

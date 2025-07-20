@@ -1,6 +1,7 @@
+"use client";
 import { Swiper, SwiperSlide } from "swiper/react";
-import Portfolio41 from "../../../public/assets/imgs/portfolio/4/1.jpg";
-import Portfolio42 from "../../../public/assets/imgs/portfolio/4/2.jpg";
+import Portfolio41 from "../../../public/assets/imgs/hero/blog (1).png";
+import Portfolio42 from "../../../public/assets/imgs/hero/blog (2).png";
 
 // Import Swiper styles
 import "swiper/css";

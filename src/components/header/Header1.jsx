@@ -7,8 +7,9 @@ import { useRouter } from "next/navigation";
 import NavItem from "../nav/NavItem";
 import LogoItem from "../logo/LogoItem";
 
-export default function Header1({ navData }) {
-  const [topScroll, setTopScroll] = useState(0);
+
+export default function Header1({ navData }) {  const [topScroll, setTopScroll] = useState(0);
+  const [visible, setVisible] = useState(true);
   const [searchData, setSearchData] = useState({});
   const [searchValue, setSearchValue] = useState("");
   const [searchSlug, setSearchSlug] = useState([]);
@@ -19,27 +20,39 @@ export default function Header1({ navData }) {
   const searchIcon = useRef();
   const searchClose = useRef();
   const searchContent = useRef();
-
+  const prevScrollPos = useRef(0);
+  
   const router = useRouter();
   const handleTopScroll = () => {
-    const position = window.pageYOffset;
-    setTopScroll(position);
+    const currentScrollPos = window.pageYOffset;
+    
+    // Show header when scrolling up or at top of page
+    const isVisible = prevScrollPos.current > currentScrollPos || currentScrollPos < 10;
+    
+    setVisible(isVisible);
+    prevScrollPos.current = currentScrollPos;
+    setTopScroll(currentScrollPos);
   };
-
   useEffect(() => {
     setSearchData(SearchData.search);
     window.addEventListener("scroll", handleTopScroll, { passive: true });
     return () => {
       window.removeEventListener("scroll", handleTopScroll);
     };
-  }, []);
-  if (typeof window !== "undefined") {
+  }, []);if (typeof window !== "undefined") {
     let header_bg_3 = headerArea.current;
     if (header_bg_3) {
       if (topScroll > 20) {
         header_bg_3.classList.add("sticky-3");
       } else {
         header_bg_3.classList.remove("sticky-3");
+      }
+      
+      // Add/remove hide class based on scroll direction
+      if (visible) {
+        header_bg_3.classList.remove("header-hidden");
+      } else {
+        header_bg_3.classList.add("header-hidden");
       }
     }
   }
@@ -95,16 +108,23 @@ export default function Header1({ navData }) {
   };
   return (
     <>
-      {navData && Object.keys(navData).length && (
-        <>
-          <header className="header__area-3" ref={headerArea}>
+      {navData && Object.keys(navData).length && (        <>
+          <header 
+            className="header__area-3" 
+            ref={headerArea}
+            style={{
+              transform: visible ? 'translateY(0)' : 'translateY(-100%)',
+              transition: 'transform 0.3s ease-in-out'
+            }}
+          >
             <div className="header__inner-3">
               <LogoItem />
               {navData.nav && navData.nav.length && (
                 <NavItem nav={navData.nav} navStyle={3} />
               )}
-              <div className="header__nav-icon-3">
+              <div  className="header__nav-icon-3">
                 <button
+                hidden
                   className="search-icon"
                   onClick={openSearch}
                   id="search_icon"

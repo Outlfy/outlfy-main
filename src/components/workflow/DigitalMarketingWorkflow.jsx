@@ -1,3 +1,4 @@
+"use client";
 import { useEffect, useRef } from "react";
 import { Power1, gsap } from "gsap";
 import { ScrollTrigger } from "@/plugins";
@@ -92,19 +93,37 @@ const DigitalMarketingWorkflow = () => {
                 );
             }
           }
-          for (let i = 1; i < 5; i++) {
-            gsap.from(gsap.utils.toArray(`.count${i}`), {
-              textContent: 0,
-              duration: 1,
-              delay: 3,
-              ease: Power1.easeIn,
-              snap: { textContent: 1 },
-              stagger: 1,
-              scrollTrigger: {
-                trigger: ".counter__number",
+          // Counter animations with preserved suffixes
+          const counterConfigs = [
+            { selector: '.count1', start: 0, end: 50, suffix: '+' },
+            { selector: '.count2', start: 0, end: 15, suffix: '+' },
+            { selector: '.count3', start: 0, end: 6, suffix: '+' },
+            { selector: '.count4', start: 0, end: 25, suffix: 'K+' }
+          ];
+
+          counterConfigs.forEach((config, index) => {
+            gsap.fromTo(gsap.utils.toArray(config.selector), 
+              { 
+                textContent: config.start 
               },
-            });
-          }
+              {
+                textContent: config.end,
+                duration: 1,
+                delay: 3 + (index * 0.2),
+                ease: Power1.easeIn,
+                snap: { textContent: 1 },
+                scrollTrigger: {
+                  trigger: ".counter__number",
+                },
+                onUpdate: function() {
+                  this.targets().forEach(target => {
+                    const currentValue = Math.round(target.textContent);
+                    target.textContent = currentValue + config.suffix;
+                  });
+                }
+              }
+            );
+          });
         }
       });
       return () => tHero.revert();
@@ -128,7 +147,7 @@ const DigitalMarketingWorkflow = () => {
             </div>
           </div>
 
-          <div className="research__area wf_panel pt-150">
+          <div className="research__area wf_panel pt-80">
             <div className="container inner_content">
               <div className="row">
                 <div className="col-xxl-6 col-xl-6 col-lg-6">
@@ -138,24 +157,21 @@ const DigitalMarketingWorkflow = () => {
                       choose us
                     </h2>
                     <h3 className="sec-title">
-                      Keword,Research Strategy, Survey, & Analytics
+                      Your Tech Growth, Guaranteed !
                     </h3>
                     <p>
-                      Attention, we take out our round glasses and our sweater
-                      with elbow patches to go back to the origins of the user
-                      experience: the first mention of the user and its
-                      importance was born in the
+                      Most businesses waste $10,000+/year on fragmented tools, missed automation, and reactive fixes. Here&apos;s how we fix it:
                     </p>
                   </div>
                   <ul className="research__tools">
                     <li>
-                      <a href="#">Google</a>
+                      <a href="https://www.linkedin.com/company/outlfy" target="_blank" rel="noopener noreferrer">LinkedIn</a>
                     </li>
                     <li>
-                      <a href="#">pinterest</a>
+                      <a href="https://x.com/outlfy" target="_blank" rel="noopener noreferrer">X (formerly Twitter)</a>
                     </li>
                     <li>
-                      <a href="#">Instagram</a>
+                      <a href="https://www.instagram.com/outlfy_business_coach/" target="_blank" rel="noopener noreferrer">Instagram</a>
                     </li>
                   </ul>
                 </div>
@@ -163,39 +179,36 @@ const DigitalMarketingWorkflow = () => {
                   <div className="research__list">
                     <div className="research__item">
                       <div className="research__number">
-                        <span>60%</span>
+                        <span>40%</span>
                       </div>
                       <div className="research__info">
-                        <h4 className="research__title">Strategy</h4>
+                        <h4 className="research__title">Cost Savings</h4>
                         <p>
-                          Your marketing strategy optimizing performances
-                          doesn’t have to be a guessing game.
+                          Eliminate the need for multiple SaaS tools and agencies. We consolidate your tech stack, automate workflows, and help you save 40%+ annually on IT and software operations
                         </p>
                       </div>
                     </div>
 
                     <div className="research__item">
                       <div className="research__number">
-                        <span>95%</span>
+                        <span>30 DAY</span>
                       </div>
                       <div className="research__info">
-                        <h4 className="research__title">Audience</h4>
+                        <h4 className="research__title">Deployments</h4>
                         <p>
-                          Your marketing strategy optimizing performances
-                          doesn’t have to be a guessing game.
+                          Launch AI solutions, internal tools, or full-scale digital ecosystems in 30 days or less
                         </p>
                       </div>
                     </div>
 
                     <div className="research__item">
                       <div className="research__number">
-                        <span>70%</span>
+                        <span>$0</span>
                       </div>
                       <div className="research__info">
-                        <h4 className="research__title">Keyword</h4>
+                        <h4 className="research__title">Risk Guarantee</h4>
                         <p>
-                          Your marketing strategy optimizing performances
-                          doesn’t have to be a guessing game.
+                         Get a 45-minute expert audit at no cost. We only charge when we deliver results
                         </p>
                       </div>
                     </div>
@@ -209,8 +222,8 @@ const DigitalMarketingWorkflow = () => {
             <div className="container">
               <div className="row">
                 <div className="col-xxl-12">
-                  <div className="sec-title-wrapper">
-                    <h2 className="sec-sub-title">
+                  <div className="sec-title-wrapper pt-5">
+                    <h2 className="sec-sub-title pb-3">
                       Why <br />
                       Choose Us
                     </h2>
@@ -221,31 +234,30 @@ const DigitalMarketingWorkflow = () => {
                 <div className="col-xxl-5 col-xl-5 col-lg-5 col-md-5">
                   <div className="counter__wrapper-3">
                     <div className="counter__item-3">
-                      <h2 className="counter__number count1">25k</h2>
+                      <h2 className="counter__number count1">50+</h2>
                       <p>
                         Project <br />
                         completed
                       </p>
                     </div>
                     <div className="counter__item-3">
-                      <h2 className="counter__number count2">8k</h2>
+                      <h2 className="counter__number count2">15+</h2>
                       <p>
                         Happy <br />
                         customers
                       </p>
                     </div>
                     <div className="counter__item-3">
-                      <h2 className="counter__number count3">15</h2>
+                      <h2 className="counter__number count3">6+</h2>
                       <p>
                         Years <br />
                         experiences
                       </p>
                     </div>
                     <div className="counter__item-3">
-                      <h2 className="counter__number count4">98</h2>
+                      <h2 className="counter__number count4">25K+</h2>
                       <p>
-                        Awards <br />
-                        achievement
+                        Active Users Supported
                       </p>
                     </div>
                   </div>

@@ -47,3 +47,17 @@
 @import "layout/home-7";
 @import "layout/home-11";
 @import "utils/dir-rtl";
+
+.lottie-animation>canvas {
+    position: absolute;
+    left: 29pc;
+    transform: scale(1.5);
+    top: 0;
+    display: block;
+}
+
+@media (max-width: 991px) {
+    .lottie-animation {
+        display: none;
+    }
+}

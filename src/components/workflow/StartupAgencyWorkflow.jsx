@@ -1,9 +1,10 @@
+"use client";
 import { useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "@/plugins";
-import Thumb1 from "../../../public/assets/imgs/thumb/1.png";
-import Thumb2 from "../../../public/assets/imgs/thumb/2.png";
-import Thumb3 from "../../../public/assets/imgs/thumb/3.png";
+import Thumb1 from "../../../public/assets/imgs/hero/ecom_info_1 (1).svg";
+import Thumb2 from "../../../public/assets/imgs/hero/ecom_info_1 (2).svg";
+import Thumb3 from "../../../public/assets/imgs/hero/ecom_info_1 (3).svg";
 import Image from "next/image.js";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -67,13 +68,12 @@ const StartupAgencyWorkflow = () => {
           </div>
 
           <div className="row animation_workflow_6">
-            <div className="col-xxl-12">
-              <div className="title-wrapper-6 text-anim">
-                <h2 className="sec-subtile-6">Processing</h2>
+            <div className="col-xxl-12">              <div className="title-wrapper-6 text-anim">
+                <h2 className="sec-subtile-6">Your Growth, Simplified</h2>
                 <h3 className="sec-title-6 title-anim">How we work</h3>
                 <p>
-                  Adjust your design through a wide range of theme options in
-                  the <br /> development and instantly.
+                  We create a full blueprint of your business, then find tasks you can automate <br /> 
+                  and tools that can save you money.
                 </p>
               </div>
             </div>
@@ -85,11 +85,9 @@ const StartupAgencyWorkflow = () => {
                   style={{ height: "auto" }}
                   src={Thumb1}
                   alt="Work Image"
-                />
-                <h4 className="workflow__title-4">Teamwork</h4>
+                />                <h4 className="workflow__title-4">Audit</h4>
                 <p>
-                  Modern and unique design practically point of view, it risks
-                  not meeting the huge expectations
+                  We create a full blueprint of your business, then find tasks you can automate and tools that can save you money.
                 </p>
               </div>
             </div>
@@ -101,11 +99,9 @@ const StartupAgencyWorkflow = () => {
                   style={{ height: "auto" }}
                   src={Thumb2}
                   alt="Work Image"
-                />
-                <h4 className="workflow__title-4">Networking</h4>
+                />                <h4 className="workflow__title-4">Build</h4>
                 <p>
-                  Using year-over-year design and latest techs, we will ensure
-                  that your new website will be visible
+                  We make software that works exactly how your business needs it.
                 </p>
               </div>
             </div>
@@ -117,11 +113,9 @@ const StartupAgencyWorkflow = () => {
                   style={{ height: "auto" }}
                   src={Thumb3}
                   alt="Work Image"
-                />
-                <h4 className="workflow__title-4">Exposure</h4>
+                />                <h4 className="workflow__title-4">Scale</h4>
                 <p>
-                  Brand strategy tools are made size for marketing teams taken
-                  possession of global strategy
+                  Grow faster by adding stores, saving time with automation, and becoming the top player in your space.
                 </p>
               </div>
             </div>

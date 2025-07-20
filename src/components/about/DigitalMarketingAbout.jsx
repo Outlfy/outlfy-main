@@ -1,3 +1,4 @@
+"use client";
 import { useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollSmoother } from "@/plugins";
@@ -51,131 +52,46 @@ const DigitalMarketingAbout = () => {
               <div className="sec-text-wrapper">
                 <div className="sec-text text-anim">
                   <p>
-                    We're <strong>Outlfy</strong>—a tech partner for startups and
-                    scaling businesses. We don't just write code; we{" "}
-                    <strong>solve growth bottlenecks</strong> with:
+                    We’re <strong>Outlfy</strong>— your strategic tech partner for startups and scaling businesses. We don’t just write code;<strong> we eliminate growth bottlenecks</strong> through smart systems and technology built for scale.
+
                   </p>
-                  <div
-                    className="feature-list"
-                    style={{
-                      marginTop: "20px"
-                    }}
-                  >
-                    <div
-                      className="feature-item"
-                      style={{
-                        display: "flex",
-                        alignItems: "flex-start",
-                      }}
-                    >
-                      <div
-                        className="feature-icon"
-                        style={{
-                          marginRight: "15px",
-                          fontSize: "24px",
-                          color: "var(--primary, #FE4A1B) !",
-                        }}
-                      >
-                        <i className="fa-solid fa-robot"></i>
-                      </div>
-                      <div className="feature-content">
-                        <h4
-                          style={{
-                            fontSize: "18px",
-                            marginBottom: "5px",
-                            color: "#e5e7eb",
-                          }}
-                        >
-                          <strong>AI-powered automation</strong>
-                        </h4>
-                        <p
-                          style={{
-                            color: "#e5e7eb",
-                          }}
-                        >
-                          <em>(Cut operational costs by 40%)</em>
-                        </p>
-                      </div>
+                  <div className="feature-list" style={{ marginTop: "20px" }}>
+                    <div className="feature-item" style={{ display: "flex", alignItems: "flex-start" }}>
+                      <div className="feature-icon" style={{ marginRight: "15px", fontSize: "24px", color: "#e5e7eb" }}>
+                          <i className="fa-solid fa-robot"></i>
+                        </div>
+                        <div className="feature-content">
+                          <p style={{ fontSize: "18px", color: "#e5e7eb" }}><strong>AI-powered automation</strong></p>
+                          <p style={{ color: "var(--gray-2, #666)" }}>Boost efficiency with smart automation.</p>
+                        </div>
                     </div>
-                    <div
-                      className="feature-item"
-                      style={{
-                        display: "flex",
-                        alignItems: "flex-start",
-                      }}
-                    >
-                      <div
-                        className="feature-icon"
-                        style={{
-                          marginRight: "15px",
-                          fontSize: "24px",
-                          color: "#e5e7eb",
-                        }}
-                      >
-                        <i className="fa-solid fa-layer-group"></i>
-                      </div>
-                      <div className="feature-content">
-                        <h4
-                          style={{
-                            fontSize: "18px",
-                            color: "#e5e7eb",
-                          }}
-                        >
-                          <strong>All-in-one tech stacks</strong>
-                        </h4>
-                        <p
-                          style={{
-                            color: "#e5e7eb",
-                          }}
-                        >
-                          <em>(E-commerce, delivery, CRM—no fragmentation)</em>
-                        </p>
-                      </div>
+                    <div className="feature-item" style={{ display: "flex", alignItems: "flex-start" }}>
+                      <div className="feature-icon" style={{ marginRight: "15px", fontSize: "24px", color: "#e5e7eb" }}>
+                          <i className="fa-solid fa-layer-group"></i>
+                        </div>
+                        <div className="feature-content">
+                          <p style={{ fontSize: "18px", color: "#e5e7eb" }}><strong>All-in-one tech stacks</strong></p>
+                          <p style={{ color: "var(--gray-2, #666)" }}>Streamline your tech ecosystem.</p>
+                        </div>
                     </div>
-                    <div
-                      className="feature-item"
-                      style={{
-                        display: "flex",
-                        alignItems: "flex-start",
-                        color: "#e5e7eb",
-                      }}
-                    >
-                      <div
-                        className="feature-icon"
-                        style={{
-                          marginRight: "15px",
-                          fontSize: "24px",
-                          color: "#e5e7eb",
-                        }}
-                      >
-                        <i className="fa-solid fa-chart-line"></i>
-                      </div>
-                      <div className="feature-content">
-                        <h4
-                          style={{
-                            fontSize: "18px",
-                            marginBottom: "5px",
-                          }}
-                        >
-                          <strong>Data-driven decisions</strong>
-                        </h4>
-                        <p
-                          style={{
-                            color: "var(--gray-2, #666)",
-                          }}
-                        >
-                          <em>(From dashboards to execution)</em>
-                        </p>
-                      </div>
+                    <div className="feature-item" style={{ display: "flex", alignItems: "flex-start", color: "#e5e7eb" }}>
+                      <div className="feature-icon" style={{ marginRight: "15px", fontSize: "24px", color: "white" }}>
+                          <i className="fa-solid fa-chart-line"></i>
+                        </div>
+                        <div className="feature-content">
+                          <h4 style={{ fontSize: "18px", marginBottom: "5px" }}><strong>Data-driven decisions</strong></h4>
+                          <p style={{ color: "var(--gray-2, #666)" }}>We turn complex data into clear, growth-focused strategies through tailored reports.</p>
+                        </div>
                     </div>
                   </div>
                   <div className="btn_wrapper">
                     <Link
-                      className="wc-btn-light btn-hover btn-item"
+                      className="wc-btn-light btn-hover btn-item text-center"
                       href="/about"
                     >
-                      <span></span> Explore How We Work{" "}
-                      <i className="fa-solid fa-arrow-right"></i>
+                      <span></span>
+                      Explore How We Work
+                      {/* <i className="fa-solid fa-arrow-right"></i> */}
                     </Link>
                   </div>
                 </div>

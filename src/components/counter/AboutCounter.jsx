@@ -1,3 +1,4 @@
+"use client"
 import { useEffect } from "react";
 import { Power1, gsap } from "gsap";
 import { ScrollTrigger } from "@/plugins";
@@ -70,34 +71,34 @@ const AboutCounter = () => {
             <div className="col-xxl-12">
               <div className="counter__wrapper-2 counter_animation">
                 <div className="counter__item-2 counter__anim">
-                  <h2 className="counter__number count1">25k</h2>
+                  <h2 className="counter__number count1">25</h2>
                   <p>
-                    Project <br />
-                    completed
+                    Integrated Tech <br />
+                    Ecosystems Deployed
                   </p>
                   <span className="counter__border"></span>
                 </div>
                 <div className="counter__item-2 counter__anim">
-                  <h2 className="counter__number count2">8k</h2>
+                  <h2 className="counter__number count2">10</h2>
                   <p>
-                    Happy <br />
-                    customers
+                    Million+ Client Savings <br />
+                    from Automation
                   </p>
                   <span className="counter__border"></span>
                 </div>
                 <div className="counter__item-2 counter__anim">
-                  <h2 className="counter__number count3">15</h2>
+                  <h2 className="counter__number count3">90</h2>
                   <p>
-                    Years <br />
-                    experiences
+                    % Faster Deployment <br />
+                    Than Competitors
                   </p>
                   <span className="counter__border"></span>
                 </div>
                 <div className="counter__item-2 counter__anim">
-                  <h2 className="counter__number count4">98</h2>
+                  <h2 className="counter__number count4">100</h2>
                   <p>
-                    Awards <br />
-                    achievement
+                    % Commitment to <br />
+                    Measurable ROI
                   </p>
                   <span className="counter__border"></span>
                 </div>

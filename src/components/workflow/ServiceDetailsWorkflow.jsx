@@ -1,3 +1,4 @@
+"use client";
 const ServiceDetailsWorkflow = () => {
   return (
     <>
@@ -5,16 +6,14 @@ const ServiceDetailsWorkflow = () => {
         <div className="container g-0 line pb-130">
           <div className="line-3"></div>
           <div className="workflow__wrapper-6">
-            <div className="row">
-              <div className="col-xxl-3 col-xl-3 col-lg-3 col-md-3">
+            <div className="row">              <div className="col-xxl-3 col-xl-3 col-lg-3 col-md-3">
                 <div className="workflow__slide-6">
                   <h6 className="workflow__title-6">
-                    Planning and <br />
-                    sketching
+                    Deep <br />
+                    Discovery
                   </h6>
                   <p>
-                    Modern and unique design practically point of view, it risks
-                    not meeting the huge expectations
+                    60-min session mapping your operations, goals, and pain points. No assumptions—just your business reality.
                   </p>
                 </div>
               </div>
@@ -22,12 +21,11 @@ const ServiceDetailsWorkflow = () => {
               <div className="col-xxl-3 col-xl-3 col-lg-3 col-md-3">
                 <div className="workflow__slide-6">
                   <h6 className="workflow__title-6">
-                    Team <br />
-                    working
+                    Forensic <br />
+                    Dig
                   </h6>
                   <p>
-                    Modern and unique design practically point of view, it risks
-                    not meeting the huge expectations
+                    48-hour infrastructure scan + workflow time-tracking. Finding the 20% efforts wasting 80% costs.
                   </p>
                 </div>
               </div>
@@ -35,12 +33,11 @@ const ServiceDetailsWorkflow = () => {
               <div className="col-xxl-3 col-xl-3 col-lg-3 col-md-3">
                 <div className="workflow__slide-6">
                   <h6 className="workflow__title-6">
-                    Flowchart and <br />
-                    wireframe
+                    Impact <br />
+                    Analysis
                   </h6>
                   <p>
-                    Modern and unique design practically point of view, it risks
-                    not meeting the huge expectations
+                    Model savings scenarios against growth targets. Proof before prescriptions.
                   </p>
                 </div>
               </div>
@@ -48,12 +45,11 @@ const ServiceDetailsWorkflow = () => {
               <div className="col-xxl-3 col-xl-3 col-lg-3 col-md-3">
                 <div className="workflow__slide-6">
                   <h6 className="workflow__title-6">
-                    User experience <br />
-                    Testing
+                    Profit <br />
+                    Roadmap
                   </h6>
                   <p>
-                    Modern and unique design practically point of view, it risks
-                    not meeting the huge expectations
+                    Prioritized action plan with exact timelines/ROI. Your tech turned into a profit engine.
                   </p>
                 </div>
               </div>

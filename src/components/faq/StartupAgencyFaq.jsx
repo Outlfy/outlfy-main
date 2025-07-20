@@ -1,3 +1,4 @@
+"use client";
 import { useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "@/plugins";
@@ -57,14 +58,12 @@ const StartupAgencyFaq = () => {
       <section className="faq__area-4 pt-150 pb-150">
         <div className="container g-0">
           <div className="row">
-            <div className="col-xxl-8 col-xl-8 col-lg-7 col-md-6">
-              <div className="faq__sec-title text-anim">
+            <div className="col-xxl-8 col-xl-8 col-lg-7 col-md-6">              <div className="faq__sec-title text-anim">
                 <h2 className="sec-subtile-6">Expertise</h2>
                 <h3 className="sec-title-6 title-anim">
-                  With more than 16+ years of experience, our team has become a
-                  leader in digital innovations.
+                  Built for Scaling, Designed for Simplicity. From single stores to 100+ locations.
                 </h3>
-                <p>Grow brands through bold, strategic creative</p>
+                <p>Our AI-powered suite adapts to retail chains, food & hospitality, service businesses, and digital sellers</p>
                 <Link className="btn-view" href="/about">
                   Know More <i className="fa-solid fa-arrow-right"></i>
                 </Link>
@@ -81,18 +80,16 @@ const StartupAgencyFaq = () => {
                   <Accordion.Item
                     eventKey="0"
                     className="accordion-item fade_bottom_3"
-                  >
-                    <Accordion.Header
+                  >                    <Accordion.Header
                       className="accordion-header"
                       id="headingOne"
                     >
-                      Design should enrich our day
+                      AI-Powered Automation
                     </Accordion.Header>
                     <Accordion.Body className="accordion-body">
                       <p>
-                        Using year-over-year design approaches and latest techs,
-                        we will ensure that your new website will be{" "}
-                        <span>accessible, and treads lightly</span>.
+                        Predict demand, optimize routes, cut waste – no manual work. Our AI analyzes trends and{" "}
+                        <span>predicts stock needs automatically</span>.
                       </p>
                     </Accordion.Body>
                   </Accordion.Item>
@@ -100,18 +97,15 @@ const StartupAgencyFaq = () => {
                   <Accordion.Item
                     eventKey="1"
                     className="accordion-item fade_bottom_3"
-                  >
-                    <Accordion.Header
+                  >                    <Accordion.Header
                       className="accordion-header"
                       id="headingTwo"
                     >
-                      Bring their individual experience and creative
+                      Scale on Your Terms
                     </Accordion.Header>
                     <Accordion.Body className="accordion-body">
                       <p>
-                        {
-                          "This is the second item's accordion body. It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes"
-                        }
+                        Start with one tool or deploy the full suite. Grow when you're ready. Our platform adapts to your business size.
                       </p>
                     </Accordion.Body>
                   </Accordion.Item>
@@ -119,19 +113,15 @@ const StartupAgencyFaq = () => {
                   <Accordion.Item
                     eventKey="2"
                     className="accordion-item fade_bottom_3"
-                  >
-                    <Accordion.Header
+                  >                    <Accordion.Header
                       className="accordion-header"
                       id="headingThree"
                     >
-                      Human centred design to challenges
+                      Fully Customizable
                     </Accordion.Header>
                     <Accordion.Body className="accordion-body">
                       <p>
-                        Our design services starts and ends with a best-in-class
-                        experience strategy that builds brands. Through a
-                        process of iteration and prototyping design interfaces
-                        that bring joy to people
+                        Tailor workflows, dashboards, and reports to your niche. Our platform adjusts to your business needs, not the other way around.
                       </p>
                     </Accordion.Body>
                   </Accordion.Item>
@@ -139,19 +129,15 @@ const StartupAgencyFaq = () => {
                   <Accordion.Item
                     eventKey="3"
                     className="accordion-item fade_bottom_3"
-                  >
-                    <Accordion.Header
+                  >                    <Accordion.Header
                       className="accordion-header"
                       id="headingFour"
                     >
-                      Design should enrich our day
+                      Retail Chains & Food Business
                     </Accordion.Header>
                     <Accordion.Body className="accordion-body">
                       <p>
-                        Our design services starts and ends with a best-in-class
-                        experience strategy that builds brands. Through a
-                        process of iteration and prototyping design interfaces
-                        that bring joy to people
+                        Perfect for fashion, electronics, supermarkets, cloud kitchens, cafes, restaurants, salons, gyms, and digital sellers.
                       </p>
                     </Accordion.Body>
                   </Accordion.Item>

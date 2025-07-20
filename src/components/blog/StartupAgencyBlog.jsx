@@ -1,9 +1,10 @@
+"use client";
 import { useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "@/plugins";
 import Link from "next/link.js";
-import Blog41 from "../../../public/assets/imgs/blog/4/1.jpg";
-import Blog42 from "../../../public/assets/imgs/blog/4/2.jpg";
+import Blog41 from "../../../public/assets/imgs/hero/case (1).png"
+import Blog42 from "../../../public/assets/imgs/hero/case (2).png"
 import Image from "next/image.js";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -63,18 +64,16 @@ const StartupAgencyBlog = () => {
           </div>
 
           <div className="row">
-            <div className="col-xxl-4 col-xl-4 col-lg-4 col-md-4">
-              <div className="sec-title-wrapper text-anim">
+            <div className="col-xxl-4 col-xl-4 col-lg-4 col-md-4">              <div className="sec-title-wrapper text-anim">
                 <h2 className="sec-subtile-6">Recent Blog</h2>
                 <h3 className="sec-title-6 title-anim">
-                  Updated <br /> Journal
+                  E-Commerce <br /> Growth Secrets
                 </h3>
                 <p>
-                  We help brands stand out through aweful, elegant visual
-                  design. Our design mainly philosophy.
+                  Learn how retailers, restaurants, and innovators cut costs and scaled 10x with Outlfy's AI-driven suite.
                 </p>
                 <Link className="btn-started" href="/blog">
-                  All Articles{" "}
+                  Read More Growth Stories{" "}
                   <span>
                     <i className="fa-solid fa-arrow-right"></i>
                   </span>
@@ -92,14 +91,13 @@ const StartupAgencyBlog = () => {
                       alt="Blog Image"
                     />
                   </Link>
-                </div>
-                <h4 className="blog__meta-4">
-                  <Link href="/category">UI Design</Link>{" "}
-                  <span>02 May 2019</span>
+                </div>                <h4 className="blog__meta-4">
+                  <Link href="/category">Case Study</Link>{" "}
+                  <span>02 Dec 2024</span>
                 </h4>
                 <h5>
                   <Link href="/blog-details" className="blog__title-4">
-                    Ways of lying to yourself about your new relationship.
+                    How MyDayOne Saved $50K/Year with Self-Serve Website Updates
                   </Link>
                 </h5>
                 <Link href="/blog-details" className="blog__btn-4">
@@ -122,14 +120,13 @@ const StartupAgencyBlog = () => {
                       alt="Blog Image"
                     />
                   </Link>
-                </div>
-                <h4 className="blog__meta-4">
-                  <Link href="/category">UX Design</Link>{" "}
-                  <span>02 May 2019</span>
+                </div>                <h4 className="blog__meta-4">
+                  <Link href="/category">AI Inventory</Link>{" "}
+                  <span>15 Dec 2024</span>
                 </h4>
                 <h5>
                   <Link href="/blog-details" className="blog__title-4">
-                    Ways of lying to yourself about your new relationship.
+                    AI Inventory Hacks: How Daykart Cut Food Waste by 40%
                   </Link>
                 </h5>
                 <Link href="/blog-details" className="blog__btn-4">

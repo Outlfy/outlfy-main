@@ -1,5 +1,6 @@
+"use client";
 import { Accordion } from "react-bootstrap";
-import ThumbFaq from "../../../public/assets/imgs/thumb/faq.jpg";
+import ThumbFaq from "../../../public/assets/imgs/techa_4.png";
 import Image from "next/image";
 
 const ServiceDetailsFaq = () => {
@@ -21,9 +22,8 @@ const ServiceDetailsFaq = () => {
               </div>
             </div>
             <div className="col-xxl-6 col-xl-6 col-lg-6 col-md-6">
-              <div className="faq__content">
-                <h2 className="faq__title title-anim">
-                  Product making for friendly users
+              <div className="faq__content">                <h2 className="faq__title title-anim">
+                  Your Tech Prescription for Exponential Growth
                 </h2>
 
                 <div className="faq__list">
@@ -31,20 +31,16 @@ const ServiceDetailsFaq = () => {
                     defaultActiveKey="0"
                     className="accordion"
                     id="accordionExample"
-                  >
-                    <Accordion.Item eventKey="0" className="accordion-item">
+                  >                    <Accordion.Item eventKey="0" className="accordion-item">
                       <Accordion.Header
                         className="accordion-header"
                         id="headingOne"
                       >
-                        Design should enrich our day
+                        What's a Cost-Leak Map?
                       </Accordion.Header>
                       <Accordion.Body className="accordion-body">
                         <p>
-                          Our design services starts and ends with a
-                          best-in-class experience strategy that builds brands.
-                          Through a process of iteration and prototyping design
-                          interfaces that bring joy to people
+                          It's like an X-ray for your tech spending. We show you exactly where money vanishes – like unused software subscriptions ($8,400/year) or inefficient processes ($9,800/year) – and give simple instructions to recover it.
                         </p>
                       </Accordion.Body>
                     </Accordion.Item>
@@ -54,13 +50,11 @@ const ServiceDetailsFaq = () => {
                         className="accordion-header"
                         id="headingTwo"
                       >
-                        Bring their individual experience and creative
+                        How does the Automation Priority List help?
                       </Accordion.Header>
                       <Accordion.Body className="accordion-body">
                         <p>
-                          {
-                            "This is the second item's accordion body. It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables."
-                          }
+                          We identify tasks wasting the most time (e.g., "Your team spends 22 hours/week on manual reports") and rank which automations give the biggest time savings. You'll get a clear "start here" plan to free up staff hours.
                         </p>
                       </Accordion.Body>
                     </Accordion.Item>
@@ -70,14 +64,11 @@ const ServiceDetailsFaq = () => {
                         className="accordion-header"
                         id="headingThree"
                       >
-                        Human centred design to challenges
+                        What protection does the Risk Mitigation Plan offer?
                       </Accordion.Header>
                       <Accordion.Body className="accordion-body">
                         <p>
-                          Our design services starts and ends with a
-                          best-in-class experience strategy that builds brands.
-                          Through a process of iteration and prototyping design
-                          interfaces that bring joy to people
+                          We find hidden dangers like customer data leaks or compliance gaps before they become lawsuits or fines. You'll receive simple checklists to fix them – no tech jargon, just "do this now" actions.
                         </p>
                       </Accordion.Body>
                     </Accordion.Item>
@@ -87,34 +78,13 @@ const ServiceDetailsFaq = () => {
                         className="accordion-header"
                         id="headingFour"
                       >
-                        Design should enrich our day
+                        Can the ROI Scorecard predict real savings?
                       </Accordion.Header>
                       <Accordion.Body className="accordion-body">
                         <p>
-                          Our design services starts and ends with a
-                          best-in-class experience strategy that builds brands.
-                          Through a process of iteration and prototyping design
-                          interfaces that bring joy to people
+                          Yes! We calculate your potential savings in actual dollars over time. Example: "Implementing X will save you $42,000 within 18 months." You see the payback timeline before spending any amount on development.
                         </p>
-                      </Accordion.Body>
-                    </Accordion.Item>
-
-                    <Accordion.Item eventKey="4" className="accordion-item">
-                      <Accordion.Header
-                        className="accordion-header"
-                        id="headingFive"
-                      >
-                        Developing core web applications
-                      </Accordion.Header>
-                      <Accordion.Body className="accordion-body">
-                        <p>
-                          Our design services starts and ends with a
-                          best-in-class experience strategy that builds brands.
-                          Through a process of iteration and prototyping design
-                          interfaces that bring joy to people
-                        </p>
-                      </Accordion.Body>
-                    </Accordion.Item>
+                      </Accordion.Body>                    </Accordion.Item>
                   </Accordion>
                 </div>
               </div>

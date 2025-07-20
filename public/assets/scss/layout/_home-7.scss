@@ -119,16 +119,7 @@
       position: relative;
       text-transform: capitalize;
 
-      &::after {
-        position: absolute;
-        content: "";
-        width: 90px;
-        height: 1px;
-        top: 14px;
-        left: 60px;
-        background-color: var(--black-2);
-        padding-left: 9px;
-      }
+     
     }
 
     p {

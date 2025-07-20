@@ -1,8 +1,9 @@
+"use client";
 import { useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "@/plugins";
 import Link from "next/link";
-import service1 from "../../../public/assets/imgs/service/4/service-1.png";
+import service1 from "../../../public/assets/imgs/hero/ecom_p_2.png";
 import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -64,21 +65,25 @@ const StartupAgencyService = () => {
           <div className="row">
             <div className="col-xxl-5 col-xl-5 col-lg-6 col-md-6">
               <div className="service__left-6">
-                <h2 className="sec-subtile-6">Services</h2>
+                {" "}
+                <h2 className="sec-subtile-6">Products</h2>
                 <h3 className="sec-title-6 title-anim">
-                  Our full <br /> creative services <br /> for you
+                  Your All-in-One <br /> Tech Stack for <br /> Effortless
+                  Scaling
                 </h3>
               </div>
             </div>
             <div className="col-xxl-7 col-xl-7 col-lg-6 col-md-6">
               <div className="service__right-4">
+                {" "}
                 <p>
-                  We are constantly rethinking the future by creating the next
-                  generation of products,{" "}
-                  <span>brands and services from a hybrid perspective.</span>
+                  We don't just build tools – we engineer ecosystems. Replace 5+
+                  vendors with one AI-driven suite and{" "}
+                  <span>save 40%+ in costs.</span>
                 </p>
                 <Link className="btn-view" href="/service">
-                  View All Service <i className="fa-solid fa-arrow-right"></i>
+                  Explore All Products{" "}
+                  <i className="fa-solid fa-arrow-right"></i>
                 </Link>
               </div>
             </div>
@@ -106,14 +111,14 @@ const StartupAgencyService = () => {
                       <h4>
                         <Link
                           className="service__item-title"
-                          href="/service-details"
+                          href="/ecommerce/website"
                         >
-                          Brand Strategy
+                          AI E-Commerce Website & App
                         </Link>
                       </h4>
                     </div>
                     <div className="service__item-icon">
-                      <Link href="/service-details">
+                      <Link href="/ecommerce/website">
                         <i className="fa-solid fa-arrow-right"></i>
                       </Link>
                     </div>
@@ -124,16 +129,17 @@ const StartupAgencyService = () => {
                     </div>
                     <div className="service__title-wrapper-4">
                       <h4>
+                        {" "}
                         <Link
                           className="service__item-title"
-                          href="/service-details"
+                          href="/ecommerce/delivery"
                         >
-                          Development
+                          Delivery Management Hero
                         </Link>
                       </h4>
                     </div>
                     <div className="service__item-icon">
-                      <Link href="/service-details">
+                      <Link href="/ecommerce/delivery">
                         <i className="fa-solid fa-arrow-right"></i>
                       </Link>
                     </div>
@@ -144,16 +150,17 @@ const StartupAgencyService = () => {
                     </div>
                     <div className="service__title-wrapper-4">
                       <h4>
+                        {" "}
                         <Link
                           className="service__item-title"
-                          href="/service-details"
+                          href="/ecommerce/inventory"
                         >
-                          UI/UX Design
+                          AI Inventory Master
                         </Link>
                       </h4>
                     </div>
                     <div className="service__item-icon">
-                      <Link href="/service-details">
+                      <Link href="/ecommerce/inventory">
                         <i className="fa-solid fa-arrow-right"></i>
                       </Link>
                     </div>
@@ -164,16 +171,17 @@ const StartupAgencyService = () => {
                     </div>
                     <div className="service__title-wrapper-4">
                       <h4>
+                        {" "}
                         <Link
                           className="service__item-title"
-                          href="/service-details"
+                          href="/techaudit"
                         >
-                          Digital marketing
+                          Task & Audit Command Center
                         </Link>
                       </h4>
                     </div>
                     <div className="service__item-icon">
-                      <Link href="/service-details">
+                      <Link href="/techaudit">
                         <i className="fa-solid fa-arrow-right"></i>
                       </Link>
                     </div>

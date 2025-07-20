@@ -120,6 +120,37 @@
 .pt-42 {
   padding-top: 40px;
 }
+.pt-80 {
+  padding-top: 80px;
+
+  @media #{$sm} {
+    padding-top: 60px;
+  }
+
+  @media #{$md} {
+    padding-top: 70px;
+  }
+
+  @media #{$lg} {
+    padding-top: 90px;
+  }
+}
+
+.pt-90 {
+  padding-top: 90px;
+
+  @media #{$sm} {
+    padding-top: 60px;
+  }
+
+  @media #{$md} {
+    padding-top: 80px;
+  }
+
+  @media #{$lg} {
+    padding-top: 90px;
+  }
+}
 
 .pt-100 {
   padding-top: 100px;

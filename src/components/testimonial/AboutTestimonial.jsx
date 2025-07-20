@@ -1,3 +1,4 @@
+"use client";
 import { FreeMode, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 
@@ -42,17 +43,15 @@ const AboutTestimonial = () => {
                       <div className="testimonial__slide">
                         <div className="testimonial__inner-2">
                           <h2 className="testimonial__title-2">
-                            Amazing digital service
+                            Doubled our B2B leads in 30 days
                           </h2>
                           <p className="testimonial__text-2">
-                            We were there right at the beginning just when the
-                            concept for search engine optimisation taking office
-                            and the full of internet. So wewe’ve grown to employ
-                            than 50 talented specialists with diverse
-                            experiences and broad skill sets of huge markers.
+                            Outlfy's AI email system doubled our B2B leads in 30
+                            days. Their automation approach is exactly what we
+                            needed to scale our sales pipeline efficiently.
                           </p>
-                          <h3 className="testimonial__author">Adam Syndera</h3>
-                          <h4 className="testimonial__role">CEO, Agency</h4>
+                          <h3 className="testimonial__author">Soach Global</h3>
+                          <h4 className="testimonial__role">Client</h4>
                         </div>
                       </div>
                     </SwiperSlide>
@@ -61,17 +60,15 @@ const AboutTestimonial = () => {
                       <div className="testimonial__slide">
                         <div className="testimonial__inner-2">
                           <h2 className="testimonial__title-2">
-                            Amazing digital service
+                            Saved us $50K in development costs
                           </h2>
                           <p className="testimonial__text-2">
-                            We were there right at the beginning just when the
-                            concept for search engine optimisation taking office
-                            and the full of internet. So wewe’ve grown to employ
-                            than 50 talented specialists with diverse
-                            experiences and broad skill sets of huge markers.
+                            Their self-service website tool saved us $50K in dev
+                            costs. The 1-click page launching feature transformed
+                            how we deploy new content and campaigns.
                           </p>
-                          <h3 className="testimonial__author">Adam Syndera</h3>
-                          <h4 className="testimonial__role">CEO, Agency</h4>
+                          <h3 className="testimonial__author">MyDayOne</h3>
+                          <h4 className="testimonial__role">Client</h4>
                         </div>
                       </div>
                     </SwiperSlide>
@@ -80,17 +77,15 @@ const AboutTestimonial = () => {
                       <div className="testimonial__slide">
                         <div className="testimonial__inner-2">
                           <h2 className="testimonial__title-2">
-                            Amazing digital service
+                            A tech partner that speaks our language
                           </h2>
                           <p className="testimonial__text-2">
-                            We were there right at the beginning just when the
-                            concept for search engine optimisation taking office
-                            and the full of internet. So wewe’ve grown to employ
-                            than 50 talented specialists with diverse
-                            experiences and broad skill sets of huge markers.
+                            Finally, a tech partner that speaks our language.
+                            Their custom ERP built in 6 weeks delivered exactly
+                            what we needed for our legal practice management.
                           </p>
-                          <h3 className="testimonial__author">Adam Syndera</h3>
-                          <h4 className="testimonial__role">CEO, Agency</h4>
+                          <h3 className="testimonial__author">Novam Legal</h3>
+                          <h4 className="testimonial__role">Client</h4>
                         </div>
                       </div>
                     </SwiperSlide>

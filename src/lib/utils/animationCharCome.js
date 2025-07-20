@@ -1,7 +1,7 @@
 import { gsap } from "gsap";
 import { SplitText } from "@/plugins";
 
-const animationCharCome = (charAnim, staggerTime = 0.05) => {
+const animationCharCome = (charAnim, staggerTime = 0.01) => {
   if (typeof window !== "undefined") {
     let tHero = gsap.context(() => {
       let char_come = charAnim;

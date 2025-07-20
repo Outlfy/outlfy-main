@@ -1,15 +1,15 @@
+"use client";
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { SplitText } from "@/plugins";
 import Link from "next/link.js";
 import ArrowIcon from "../../../public/assets/imgs/hero/4/arrow-icon.png";
-import Hero4 from "../../../public/assets/imgs/hero/4/hero-4.png";
 import HeroShape from "../../../public/assets/imgs/hero/4/hero-shape.png";
 import HeroShape2 from "../../../public/assets/imgs/hero/4/hero-shape-2.png";
 import HeroShape3 from "../../../public/assets/imgs/hero/4/hero-shape-3.png";
 import Shape20 from "../../../public/assets/imgs/shape/20.png";
 import Image from "next/image.js";
-
+import { DotLottieReact } from "@lottiefiles/dotlottie-react";
 const StartupAgencyHero = () => {
   const heroTitle = useRef();
   const heroText = useRef();
@@ -39,11 +39,11 @@ const StartupAgencyHero = () => {
           duration: 1,
           x: 70,
           autoAlpha: 0,
-          stagger: 0.1,
+          stagger: 0.05,
         });
         gsap.from(
           split_hero6_desc.words,
-          { duration: 1, x: 50, autoAlpha: 0, stagger: 0.05 },
+          { duration: 1, x: 50, autoAlpha: 0, stagger: 0.01 },
           "-=1"
         );
         gsap.to(
@@ -82,30 +82,31 @@ const StartupAgencyHero = () => {
                   alt="Arrow Icon"
                 />
                 <h1 className="hero__title-6 " ref={heroTitle}>
-                  Magical <br /> Axtra Startup Solution{" "}
+                  The Only<br /> E-Commerce Suite<br />  You'll Ever Need
                 </h1>
                 <p ref={heroText}>
-                  Our team always reviews all previous methods with <br />{" "}
-                  models, and processes to determined
+                  We create websites, apps, AI inventory, delivery systems, task management—all in one e-commerce suite. <br />{" "}
+                  Fully customizable. Start scaling today.
                 </p>
                 <Link
                   className="btn-started btn-hover"
                   href="/contact"
                   ref={heroAnchor}
                 >
-                  Get Started
+                  Claim Free 45-Min Tech Audit
                 </Link>
               </div>
             </div>
             <div className="col-xxl-6 col-xl-6 col-lg-6 col-md-6">
               <div className="hero__right-6">
-                <Image
-                  priority
-                  style={{ width: "auto", height: "auto" }}
-                  src={Hero4}
-                  alt="Hero Image"
-                  ref={heroImg}
+                <DotLottieReact
+                  src="https://outlfymain.vercel.app/mcnmijcc.lottie"
+                  loop
+                  autoplay
+                  className="lottie-animation"
+                  // ref={heroImg}
                 />
+                
               </div>
             </div>
           </div>

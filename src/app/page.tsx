@@ -1,4 +1,10 @@
-'use client'
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Outlfy - Tech Partners',
+  description: 'Outlfy helps businesses succeed with custom software development and technology strategy',
+};
+
 import RootLayout from "@/components/common/layout/RootLayout";
 import DigitalMarketingHero from "@/components/hero/DigitalMarketingHero";
 import DigitalMarketingBrand from "@/components/brand/DigitalMarketingBrand";
@@ -19,10 +25,10 @@ export default function DigitalMarketing() {
         <DigitalMarketingAbout />
         <DigitalMarketingService />
         <DigitalMarketingProtfolio />
-        <DigitalMarketingTestimonial />
+        {/* <DigitalMarketingTestimonial /> */}
         <DigitalMarketingWorkflow />
-        <DigitalMarketingPrice />
-        <DigitalMarketingBlog />
+        {/* <DigitalMarketingPrice /> */}
+        {/* <DigitalMarketingBlog /> */}
       </RootLayout>
     </main>
   );

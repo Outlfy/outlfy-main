@@ -1,5 +1,6 @@
+"use client";
 import Link from "next/link";
-import Thumb41 from "../../../public/assets/imgs/thumb/4/1.png";
+import Thumb41 from "../../../public/assets/imgs/hero/ecom_p_4.png";
 import Shape21 from "../../../public/assets/imgs/shape/21.png";
 import Shape22 from "../../../public/assets/imgs/shape/22.png";
 import Image from "next/image";
@@ -37,13 +38,11 @@ const StartupAgencyCTA = () => {
                 </div>
               </div>
               <div className="col-xxl-4 col-xl-4 col-lg-4 col-md-4">
-                <div className="cta__content-4 text-anim">
-                  <p>
-                    Using year-over-year most design approaches and latest techs
-                    website will be lightly.
+                <div className="cta__content-4 text-anim">                  <p>
+                    Let's fix your tech chaos in 14 days – guaranteed. Replace 5+ vendors with one AI-driven suite.
                   </p>
                   <Link className="btn-started" href="/contact">
-                    Get a Quote{" "}
+                    Claim Free Tech Audit{" "}
                     <span>
                       <i className="fa-solid fa-arrow-right"></i>
                     </span>
