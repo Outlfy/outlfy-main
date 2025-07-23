@@ -65,7 +65,7 @@ const StartupAgencyBlog = () => {
 
           <div className="row">
             <div className="col-xxl-4 col-xl-4 col-lg-4 col-md-4">              <div className="sec-title-wrapper text-anim">
-                <h2 className="sec-subtile-6">Recent Blog</h2>
+                <h2 className="sec-subtile-6">Recent Case Studies</h2>
                 <h3 className="sec-title-6 title-anim">
                   E-Commerce <br /> Growth Secrets
                 </h3>

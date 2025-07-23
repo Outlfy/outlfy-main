@@ -45,19 +45,19 @@ const slides = [
     alt: "MyDayOne Case Study",
     cta: "See how we cut their dev costs"
   },
-  {
-    title: (
-      <>
-        Soach <span>Global</span>
-      </>
-    ),
-    challenge: "Needed an end-to-end ecosystem (app + portals + website) in record time.",
-    solution: "Full-stack development (app + 3 portals + SEO-optimized site).",
-    result: "8-week deployment (50% faster than industry avg), 2x user engagement post-launch",
-    img: Portfilio33,
-    alt: "Soach Global Case Study",
-    cta: "Explore their tech transformation"
-  },
+  // {
+  //   title: (
+  //     <>
+  //       Soach <span>Global</span>
+  //     </>
+  //   ),
+  //   challenge: "Needed an end-to-end ecosystem (app + portals + website) in record time.",
+  //   solution: "Full-stack development (app + 3 portals + SEO-optimized site).",
+  //   result: "8-week deployment (50% faster than industry avg), 2x user engagement post-launch",
+  //   img: Portfilio33,
+  //   alt: "Soach Global Case Study",
+  //   cta: "Explore their tech transformation"
+  // },
   {
     title: (
       <>

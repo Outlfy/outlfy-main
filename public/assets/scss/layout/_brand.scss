@@ -26,7 +26,7 @@
 
   &__list {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     background-color: var(--white);
     border-bottom: 1px solid var(--white-3);
     position: relative;

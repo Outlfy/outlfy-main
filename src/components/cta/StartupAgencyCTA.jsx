@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import Thumb41 from "../../../public/assets/imgs/hero/ecom_p_4.png";
+import Thumb41 from "../../../public/assets/imgs/1 (1).webp";
 import Shape21 from "../../../public/assets/imgs/shape/21.png";
 import Shape22 from "../../../public/assets/imgs/shape/22.png";
 import Image from "next/image";

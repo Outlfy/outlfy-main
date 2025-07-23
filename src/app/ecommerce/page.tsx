@@ -12,11 +12,11 @@ import StartupAgencyFeature from "@/components/feature/StartupAgencyFeature";
 import StartupAgencyService from "@/components/service/StartupAgencyService";
 import StartupAgencyFaq from "@/components/faq/StartupAgencyFaq";
 import StartupAgencyPortfolio from "@/components/portfolio/StartupAgencyPortfolio";
-import StartupAgencyBrand from "@/components/brand/StartupAgencyBrand";
 import StartupAgencyTestimonial from "@/components/testimonial/StartupAgencyTestimonial";
 import StartupAgencySolution from "@/components/solution/StartupAgencySolution";
 import StartupAgencyBlog from "@/components/blog/StartupAgencyBlog";
 import StartupAgencyCTA from "@/components/cta/StartupAgencyCTA";
+import DigitalMarketingBrand from '@/components/brand/DigitalMarketingBrand';
 
 const StartupAgency = () => {
   return (
@@ -28,8 +28,8 @@ const StartupAgency = () => {
           <StartupAgencyFeature />
           <StartupAgencyService />
           <StartupAgencyFaq />
-          <StartupAgencyPortfolio />
-          <StartupAgencyBrand />
+          {/* <StartupAgencyPortfolio /> */}
+          <DigitalMarketingBrand /> 
           <StartupAgencyTestimonial />
           <StartupAgencySolution />
           <StartupAgencyBlog />

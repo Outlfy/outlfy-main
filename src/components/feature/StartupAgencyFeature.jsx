@@ -7,7 +7,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import Feature41 from "../../../public/assets/imgs/feature/4/1.png";
 import Feature42 from "../../../public/assets/imgs/feature/4/2.png";
 import Feature43 from "../../../public/assets/imgs/feature/4/3.png";
-import Feature from "../../../public/assets/imgs/hero/ecom_p_1.png";
+import Feature from "../../../public/assets/imgs/feature.webp";
 import Icon1 from "../../../public/assets/imgs/feature/4/icon-1.png";
 import Icon2 from "../../../public/assets/imgs/feature/4/icon-2.png";
 import Image from "next/image";
@@ -241,7 +241,7 @@ const StartupAgencyFeature = () => {
                   </SwiperSlide>
                 </Swiper>
 
-                <div className="feature__controls mt-4">
+                {/* <div className="feature__controls mt-4">
                   <div className="feature__btn">
                     <div
                       style={{ cursor: "pointer" }}
@@ -257,7 +257,7 @@ const StartupAgencyFeature = () => {
                     </div>
                   </div>
                   
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

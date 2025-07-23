@@ -16,7 +16,7 @@ const StartupAgencyPortfolio = () => {
           <div className="row">
             <div className="col-xxl-4 col-xl-4 col-lg-4 col-md-4">
               <div className="portfolio__sec-title text-anim">
-                <h2 className="sec-subtile-6">Portfolio</h2>
+                <h2 className="sec-subtile-6">Case Study</h2>
                 <h3 className="sec-title-6 title-anim">
                   Our selected <br /> projects
                 </h3>

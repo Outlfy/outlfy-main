@@ -100,7 +100,7 @@ const StartupAgencyHero = () => {
             <div className="col-xxl-6 col-xl-6 col-lg-6 col-md-6">
               <div className="hero__right-6">
                 <DotLottieReact
-                  src="https://outlfymain.vercel.app/mcnmijcc.lottie"
+                  src="/mcnmijcc.lottie"
                   loop
                   autoplay
                   className="lottie-animation"

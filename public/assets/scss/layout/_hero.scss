@@ -209,6 +209,7 @@
 
         @media #{$sm} {
           position: unset;
+          margin-left: -258px;
         }
 
         &-anim {

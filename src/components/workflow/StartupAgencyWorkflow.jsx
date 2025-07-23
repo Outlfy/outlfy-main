@@ -2,9 +2,9 @@
 import { useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "@/plugins";
-import Thumb1 from "../../../public/assets/imgs/hero/ecom_info_1 (1).svg";
-import Thumb2 from "../../../public/assets/imgs/hero/ecom_info_1 (2).svg";
-import Thumb3 from "../../../public/assets/imgs/hero/ecom_info_1 (3).svg";
+import Thumb1 from "../../../public/assets/imgs/1.webp";
+import Thumb2 from "../../../public/assets/imgs/2.webp";
+import Thumb3 from "../../../public/assets/imgs/3.webp";
 import Image from "next/image.js";
 
 gsap.registerPlugin(ScrollTrigger);

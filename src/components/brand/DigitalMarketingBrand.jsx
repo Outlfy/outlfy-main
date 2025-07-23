@@ -152,7 +152,7 @@ const DigitalMarketingBrand = () => {
                         alt="MyDayOne Logo"
                       />
                     </div>
-                    <div className="marquee__item brand__item-2">
+                    {/* <div className="marquee__item brand__item-2">
                       <Image
                         priority
                         width={150}
@@ -160,7 +160,7 @@ const DigitalMarketingBrand = () => {
                         src={Brand3}
                         alt="Soach Global Logo"
                       />
-                    </div>
+                    </div> */}
                     <div className="marquee__item brand__item-2">
                       <Image
                         priority
@@ -208,7 +208,7 @@ const DigitalMarketingBrand = () => {
                         alt="MyDayOne Logo"
                       />
                     </div>
-                    <div className="marquee__item brand__item-2">
+                    {/* <div className="marquee__item brand__item-2">
                       <Image
                         priority
                         width={150}
@@ -216,7 +216,7 @@ const DigitalMarketingBrand = () => {
                         src={Brand3}
                         alt="Soach Global Logo"
                       />
-                    </div>
+                    </div> */}
                     <div className="marquee__item brand__item-2">
                       <Image
                         priority
@@ -249,7 +249,7 @@ const DigitalMarketingBrand = () => {
               ) : (
                 /* For desktop: Static grid layout */
                 <div className="brand__list-3">
-                  <div className="brand__item-2 fade_bottom">
+                  <div className="brand__item-2 justify-content-center fade_bottom">
                     <Image
                       priority
                       width={200}
@@ -267,7 +267,7 @@ const DigitalMarketingBrand = () => {
                       alt="MyDayOne Logo"
                     />
                   </div>
-                  <div className="brand__item-2 fade_bottom">
+                  {/* <div className="brand__item-2 fade_bottom">
                     <Image
                       priority
                       width={150}
@@ -275,7 +275,7 @@ const DigitalMarketingBrand = () => {
                       src={Brand3}
                       alt="Soach Global Logo"
                     />
-                  </div>
+                  </div> */}
                   <div className="brand__item-2 fade_bottom">
                     <Image
                       priority

@@ -21,10 +21,10 @@ const services = [
       "What You Get:",
     ],
     features: [
-      "✅ AI-Powered Inventory System",
-      "✅ Branded E-Commerce App + Website",
-      "✅ Delivery Management Suite",
-      "✅ 45-Day Deadline Guarantee",
+      "+ AI-Powered Inventory System",
+      "+ Branded E-Commerce App + Website",
+      "+ Delivery Management Suite",
+      "+ 45-Day Deadline Guarantee",
     ],
     btnText: "Start Your E-Commerce Overhaul",
     img: "assets/imgs/home_1.png",
@@ -44,9 +44,9 @@ const services = [
       "What You Get:",
     ],
     features: [
-      "✅ Custom Website + AI Admin Panel",
-      "✅ Unlimited Pages/Blogs/Forms",
-      "✅ Brand Consistency Guarantee",
+      "+ Custom Website + AI Admin Panel",
+      "+ Unlimited Pages/Blogs/Forms",
+      "+ Brand Consistency Guarantee",
     ],
     btnText: "Build Your Future-Proof Site",
     img: "assets/imgs/home_2.png",
@@ -65,9 +65,9 @@ const services = [
       "What You Get:",
     ],
     features: [
-      "✅ Pre-Built Templates",
-      "✅ 24/7 Workflow Monitoring",
-      "✅ 500-Hour Savings Guarantee",
+      "+ Pre-Built Templates",
+      "+ 24/7 Workflow Monitoring",
+      "+ 500-Hour Savings Guarantee",
     ],
     btnText: "Kill Repetitive Tasks Today",
     img: "assets/imgs/home_3.png",
@@ -87,9 +87,9 @@ const services = [
       "What You Get:",
     ],
     features: [
-      "✅ Tech Spend Audit",
-      "✅ Custom Growth Roadmap",
-      "✅ Limited Spots: Only 5/week",
+      "+ Tech Spend Audit",
+      "+ Custom Growth Roadmap",
+      "+ Limited Spots: Only 5/week",
     ],
     btnText: "Claim Your Free Session",
     img: "assets/imgs/home_4.png",
@@ -181,7 +181,9 @@ const DigitalMarketingService = () => {
                 <p>
                   After years of building tech for fast-growing businesses, we’ve developed powerful products that solve real problems. If you’re in this space, there’s a high chance we already have the perfect solution for you.
                   <br />
+                  <Link href={"/contact"} className="text-dark-emphasis">
                   <strong>Book a call — and let’s show you how we can help.</strong>
+                  </Link>
                 </p>
               </div>
             </div>

@@ -39,7 +39,7 @@ const AboutTestimonial = () => {
                       prevEl: ".prev-button",
                     }}
                   >
-                    <SwiperSlide>
+                    {/* <SwiperSlide>
                       <div className="testimonial__slide">
                         <div className="testimonial__inner-2">
                           <h2 className="testimonial__title-2">
@@ -54,7 +54,7 @@ const AboutTestimonial = () => {
                           <h4 className="testimonial__role">Client</h4>
                         </div>
                       </div>
-                    </SwiperSlide>
+                    </SwiperSlide> */}
 
                     <SwiperSlide className="swiper-slide ">
                       <div className="testimonial__slide">

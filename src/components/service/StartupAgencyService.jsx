@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "@/plugins";
 import Link from "next/link";
-import service1 from "../../../public/assets/imgs/hero/ecom_p_2.png";
+import service1 from "../../../public/assets/imgs/service-1.webp";
 import Image from "next/image";
 
 gsap.registerPlugin(ScrollTrigger);
@@ -81,10 +81,10 @@ const StartupAgencyService = () => {
                   vendors with one AI-driven suite and{" "}
                   <span>save 40%+ in costs.</span>
                 </p>
-                <Link className="btn-view" href="/service">
+                {/* <Link className="btn-view" href="/service">
                   Explore All Products{" "}
                   <i className="fa-solid fa-arrow-right"></i>
-                </Link>
+                </Link> */}
               </div>
             </div>
           </div>
