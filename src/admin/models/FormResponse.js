@@ -1,5 +1,5 @@
 // Form Response Model for MongoDB
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 const { Schema } = mongoose;
 
 const FormResponseSchema = new Schema(
@@ -42,4 +42,4 @@ FormResponseSchema.index({ email: 1 });
 FormResponseSchema.index({ status: 1 });
 FormResponseSchema.index({ createdAt: -1 });
 
-module.exports = mongoose.model('FormResponse', FormResponseSchema);
+export default mongoose.models.FormResponse || mongoose.model('FormResponse', FormResponseSchema);

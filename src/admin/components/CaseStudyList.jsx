@@ -1,55 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { Table, Button, Badge, Form, InputGroup, Alert } from "react-bootstrap";
-
-// Dummy data for demonstration
-const dummyData = [
-  {
-    _id: "1",
-    title: "MyDayOne E-commerce Platform",
-    slug: "mydayone-ecommerce",
-    clientName: "MyDayOne",
-    industry: "E-commerce",
-    projectType: "Web Development",
-    featured: true,
-    published: true,
-    createdAt: "2024-01-15",
-    timeline: {
-      start: "2024-01-01",
-      end: "2024-02-15"
-    }
-  },
-  {
-    _id: "2",
-    title: "Novam Legal Management System",
-    slug: "novam-legal-system",
-    clientName: "Novam Legal",
-    industry: "Legal",
-    projectType: "Custom Software",
-    featured: false,
-    published: true,
-    createdAt: "2024-02-20",
-    timeline: {
-      start: "2024-02-01",
-      end: "2024-03-30"
-    }
-  },
-  {
-    _id: "3",
-    title: "Soach Global App Ecosystem",
-    slug: "soach-global-ecosystem",
-    clientName: "Soach Global",
-    industry: "Technology",
-    projectType: "Mobile App",
-    featured: true,
-    published: false,
-    createdAt: "2024-03-10",
-    timeline: {
-      start: "2024-03-01",
-      end: "2024-04-20"
-    }
-  }
-];
+import { authUtils } from "@/lib/authUtils";
 
 const CaseStudyList = ({ onSelect, onDelete, refreshTrigger }) => {
   const [caseStudies, setCaseStudies] = useState([]);
@@ -65,11 +17,17 @@ const CaseStudyList = ({ onSelect, onDelete, refreshTrigger }) => {
   const fetchCaseStudies = async () => {
     setLoading(true);
     try {
-      // Simulate API call - replace with actual API endpoint
-      await new Promise(resolve => setTimeout(resolve, 500));
-      setCaseStudies(dummyData);
+      const response = await authUtils.authenticatedFetch('/api/admin/case-studies');
+      if (response.ok) {
+        const data = await response.json();
+        setCaseStudies(data || []);
+      } else {
+        throw new Error('Failed to fetch case studies');
+      }
     } catch (error) {
+      console.error('Error loading case studies:', error);
       setMessage({ type: "danger", text: "Error loading case studies" });
+      setCaseStudies([]);
     } finally {
       setLoading(false);
     }
@@ -78,12 +36,19 @@ const CaseStudyList = ({ onSelect, onDelete, refreshTrigger }) => {
   const handleDelete = async (id) => {
     if (window.confirm("Are you sure you want to delete this case study?")) {
       try {
-        // Simulate API call - replace with actual API endpoint
-        await new Promise(resolve => setTimeout(resolve, 500));
-        setCaseStudies(prev => prev.filter(cs => cs._id !== id));
-        setMessage({ type: "success", text: "Case study deleted successfully" });
-        if (onDelete) onDelete();
+        const response = await authUtils.authenticatedFetch(`/api/admin/case-studies/${id}`, {
+          method: 'DELETE',
+        });
+        
+        if (response.ok) {
+          setCaseStudies(prev => prev.filter(cs => cs._id !== id));
+          setMessage({ type: "success", text: "Case study deleted successfully" });
+          if (onDelete) onDelete();
+        } else {
+          throw new Error('Failed to delete case study');
+        }
       } catch (error) {
+        console.error('Error deleting case study:', error);
         setMessage({ type: "danger", text: "Error deleting case study" });
       }
     }
@@ -91,21 +56,37 @@ const CaseStudyList = ({ onSelect, onDelete, refreshTrigger }) => {
 
   const toggleStatus = async (id, field) => {
     try {
-      setCaseStudies(prev => 
-        prev.map(cs => 
-          cs._id === id ? { ...cs, [field]: !cs[field] } : cs
-        )
-      );
-      setMessage({ type: "success", text: `Case study ${field} updated` });
+      const caseStudy = caseStudies.find(cs => cs._id === id);
+      const updatedValue = !caseStudy[field];
+      
+      const response = await authUtils.authenticatedFetch(`/api/admin/case-studies/${id}`, {
+        method: 'PUT',
+        body: JSON.stringify({
+          ...caseStudy,
+          [field]: updatedValue
+        }),
+      });
+      
+      if (response.ok) {
+        setCaseStudies(prev => 
+          prev.map(cs => 
+            cs._id === id ? { ...cs, [field]: updatedValue } : cs
+          )
+        );
+        setMessage({ type: "success", text: `Case study ${field} updated` });
+      } else {
+        throw new Error(`Failed to update ${field}`);
+      }
     } catch (error) {
+      console.error(`Error updating ${field}:`, error);
       setMessage({ type: "danger", text: `Error updating ${field}` });
     }
   };
 
   const filteredCaseStudies = caseStudies.filter(cs => {
-    const matchesSearch = cs.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         cs.clientName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         cs.industry.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesSearch = (cs.title || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         (cs.clientName || cs.client || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         (cs.industry || '').toLowerCase().includes(searchTerm.toLowerCase());
     
     const matchesFilter = filterStatus === "all" || 
                          (filterStatus === "published" && cs.published) ||
@@ -194,16 +175,16 @@ const CaseStudyList = ({ onSelect, onDelete, refreshTrigger }) => {
                 <tr key={cs._id}>
                   <td>
                     <div>
-                      <strong>{cs.title}</strong>
+                      <strong>{cs.title || 'Untitled'}</strong>
                       <br />
-                      <small className="text-muted">/{cs.slug}</small>
+                      <small className="text-muted">/{cs.slug || 'no-slug'}</small>
                     </div>
                   </td>
-                  <td>{cs.clientName}</td>
-                  <td>{cs.industry}</td>
+                  <td>{cs.clientName || cs.client || 'N/A'}</td>
+                  <td>{cs.industry || 'N/A'}</td>
                   <td>
                     <Badge bg="info" className="rounded-pill">
-                      {cs.projectType}
+                      {cs.projectType || 'General'}
                     </Badge>
                   </td>
                   <td>
@@ -242,8 +223,9 @@ const CaseStudyList = ({ onSelect, onDelete, refreshTrigger }) => {
                       <Button
                         size="sm"
                         variant="outline-success"
-                        onClick={() => window.open(`/case-studies/${cs.slug}`, '_blank')}
+                        onClick={() => window.open(`/case-studies/${cs.slug || cs._id}`, '_blank')}
                         title="View"
+                        disabled={!cs.slug && !cs._id}
                       >
                         <i className="fas fa-eye"></i>
                       </Button>

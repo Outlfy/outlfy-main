@@ -1,49 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { Table, Button, Badge, Form, InputGroup, Alert, Modal } from "react-bootstrap";
-
-// Dummy data for demonstration
-const dummyResponses = [
-  {
-    _id: "1",
-    name: "John Doe",
-    email: "john@example.com",
-    phone: "+1-555-0123",
-    subject: "Project Inquiry",
-    message: "Hi, I'm interested in developing a custom e-commerce platform for my business. Can we schedule a call?",
-    status: "new",
-    formType: "contact",
-    source: "/contact",
-    createdAt: "2024-07-20T10:30:00Z",
-    adminNotes: ""
-  },
-  {
-    _id: "2",
-    name: "Sarah Johnson",
-    email: "sarah@techstartup.com",
-    phone: "+1-555-0456",
-    subject: "Tech Partnership",
-    message: "Looking for a development partner for our AI-powered SaaS platform. Please reach out!",
-    status: "read",
-    formType: "contact",
-    source: "/techpartnership",
-    createdAt: "2024-07-19T14:15:00Z",
-    adminNotes: "Promising lead - scheduled call for next week"
-  },
-  {
-    _id: "3",
-    name: "Mike Chen",
-    email: "mike@retailcorp.com",
-    phone: "",
-    subject: "Free Tech Audit",
-    message: "Our current tech stack is inefficient. We'd like to take advantage of your free audit offer.",
-    status: "replied",
-    formType: "contact",
-    source: "/techaudit",
-    createdAt: "2024-07-18T09:45:00Z",
-    adminNotes: "Audit completed - sent proposal"
-  }
-];
+import { authUtils } from "@/lib/authUtils";
 
 const FormResponseList = () => {
   const [responses, setResponses] = useState([]);
@@ -61,11 +19,17 @@ const FormResponseList = () => {
   const fetchResponses = async () => {
     setLoading(true);
     try {
-      // Simulate API call - replace with actual API endpoint
-      await new Promise(resolve => setTimeout(resolve, 500));
-      setResponses(dummyResponses);
+      const response = await authUtils.authenticatedFetch('/api/admin/form-responses');
+      if (response.ok) {
+        const data = await response.json();
+        setResponses(data.responses || []);
+      } else {
+        throw new Error('Failed to fetch form responses');
+      }
     } catch (error) {
+      console.error('Error loading form responses:', error);
       setMessage({ type: "danger", text: "Error loading form responses" });
+      setResponses([]);
     } finally {
       setLoading(false);
     }
@@ -73,26 +37,46 @@ const FormResponseList = () => {
 
   const updateStatus = async (id, newStatus) => {
     try {
-      setResponses(prev => 
-        prev.map(response => 
-          response._id === id ? { ...response, status: newStatus } : response
-        )
-      );
-      setMessage({ type: "success", text: "Status updated successfully" });
+      const response = await authUtils.authenticatedFetch(`/api/admin/form-responses/${id}`, {
+        method: 'PUT',
+        body: JSON.stringify({ status: newStatus }),
+      });
+      
+      if (response.ok) {
+        setResponses(prev => 
+          prev.map(response => 
+            response._id === id ? { ...response, status: newStatus } : response
+          )
+        );
+        setMessage({ type: "success", text: "Status updated successfully" });
+      } else {
+        throw new Error('Failed to update status');
+      }
     } catch (error) {
+      console.error('Error updating status:', error);
       setMessage({ type: "danger", text: "Error updating status" });
     }
   };
 
   const updateNotes = async (id, notes) => {
     try {
-      setResponses(prev => 
-        prev.map(response => 
-          response._id === id ? { ...response, adminNotes: notes } : response
-        )
-      );
-      setMessage({ type: "success", text: "Notes updated successfully" });
+      const response = await authUtils.authenticatedFetch(`/api/admin/form-responses/${id}`, {
+        method: 'PUT',
+        body: JSON.stringify({ adminNotes: notes }),
+      });
+      
+      if (response.ok) {
+        setResponses(prev => 
+          prev.map(response => 
+            response._id === id ? { ...response, adminNotes: notes } : response
+          )
+        );
+        setMessage({ type: "success", text: "Notes updated successfully" });
+      } else {
+        throw new Error('Failed to update notes');
+      }
     } catch (error) {
+      console.error('Error updating notes:', error);
       setMessage({ type: "danger", text: "Error updating notes" });
     }
   };
@@ -100,19 +84,28 @@ const FormResponseList = () => {
   const deleteResponse = async (id) => {
     if (window.confirm("Are you sure you want to delete this response?")) {
       try {
-        setResponses(prev => prev.filter(response => response._id !== id));
-        setMessage({ type: "success", text: "Response deleted successfully" });
+        const response = await authUtils.authenticatedFetch(`/api/admin/form-responses/${id}`, {
+          method: 'DELETE',
+        });
+        
+        if (response.ok) {
+          setResponses(prev => prev.filter(response => response._id !== id));
+          setMessage({ type: "success", text: "Response deleted successfully" });
+        } else {
+          throw new Error('Failed to delete response');
+        }
       } catch (error) {
+        console.error('Error deleting response:', error);
         setMessage({ type: "danger", text: "Error deleting response" });
       }
     }
   };
 
   const filteredResponses = responses.filter(response => {
-    const matchesSearch = response.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         response.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         response.subject.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         response.message.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesSearch = (response.name || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         (response.email || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         (response.subject || '').toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         (response.message || '').toLowerCase().includes(searchTerm.toLowerCase());
     
     const matchesFilter = filterStatus === "all" || response.status === filterStatus;
     

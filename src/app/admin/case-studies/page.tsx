@@ -1,29 +1,17 @@
 "use client";
 import { useState } from "react";
 import AdminLayout from "../../../admin/components/AdminLayout";
-import CaseStudyForm from "../../../admin/components/CaseStudyForm";
 import CaseStudyList from "../../../admin/components/CaseStudyList";
-import { Button } from "react-bootstrap";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function CaseStudiesPage() {
-  const [selectedCaseStudy, setSelectedCaseStudy] = useState<any>(null);
-  const [showForm, setShowForm] = useState(false);
+  const router = useRouter();
   const [refreshTrigger, setRefreshTrigger] = useState(0);
 
   const handleSelect = (caseStudy: any) => {
-    setSelectedCaseStudy(caseStudy);
-    setShowForm(true);
-  };
-
-  const handleSave = () => {
-    setSelectedCaseStudy(null);
-    setShowForm(false);
-    setRefreshTrigger(prev => prev + 1);
-  };
-
-  const handleCancel = () => {
-    setSelectedCaseStudy(null);
-    setShowForm(false);
+    // Navigate to edit page
+    router.push(`/admin/case-studies/edit/${caseStudy._id}`);
   };
 
   const handleDelete = () => {
@@ -38,44 +26,16 @@ export default function CaseStudiesPage() {
             <i className="fas fa-briefcase me-3"></i>
             Case Studies Management
           </h1>
-          <Button
-            variant="primary"
-            onClick={() => setShowForm(!showForm)}
-            className="d-flex align-items-center"
-          >
-            <i className={`fas ${showForm ? 'fa-list' : 'fa-plus'} me-2`}></i>
-            {showForm ? 'View List' : 'Add New Case Study'}
-          </Button>
+          <Link href="/admin/case-studies/new" className="btn btn-primary">
+            <i className="fas fa-plus me-2"></i>
+            New Case Study
+          </Link>
         </div>
-
-        <div className="row">
-          {!showForm ? (
-            <div className="col-12">
-              <CaseStudyList 
-                onSelect={handleSelect}
-                onDelete={handleDelete}
-                refreshTrigger={refreshTrigger}
-              />
-            </div>
-          ) : (
-            <>
-              <div className="col-lg-4">
-                <CaseStudyList 
-                  onSelect={handleSelect}
-                  onDelete={handleDelete}
-                  refreshTrigger={refreshTrigger}
-                />
-              </div>
-              <div className="col-lg-8">
-                <CaseStudyForm
-                  selected={selectedCaseStudy}
-                  onSave={handleSave}
-                  onCancel={handleCancel}
-                />
-              </div>
-            </>
-          )}
-        </div>
+        <CaseStudyList 
+          onSelect={handleSelect}
+          onDelete={handleDelete}
+          refreshTrigger={refreshTrigger}
+        />
       </div>
     </AdminLayout>
   );

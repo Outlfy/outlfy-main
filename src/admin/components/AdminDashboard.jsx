@@ -1,43 +1,80 @@
 "use client";
-import React from "react";
-import { Row, Col } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { Row, Col, Button } from "react-bootstrap";
+import { authUtils } from "@/lib/authUtils";
+import Link from "next/link";
 
 const AdminDashboard = () => {
-  const stats = [
+  const [stats, setStats] = useState({
+    caseStudies: 0,
+    formSubmissions: 0,
+    pendingResponses: 0,
+    featuredProjects: 0
+  });
+  const [recentSubmissions, setRecentSubmissions] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchDashboardData();
+  }, []);
+
+  const fetchDashboardData = async () => {
+    try {
+      setLoading(true);
+      
+      // Fetch case studies
+      const caseStudiesRes = await authUtils.authenticatedFetch('/api/admin/case-studies');
+      const caseStudiesData = await caseStudiesRes.json();
+      
+      // Fetch form responses
+      const formResponsesRes = await authUtils.authenticatedFetch('/api/admin/form-responses?limit=5');
+      const formResponsesData = await formResponsesRes.json();
+      
+      setStats({
+        caseStudies: Array.isArray(caseStudiesData) ? caseStudiesData.length : 0,
+        formSubmissions: formResponsesData.pagination ? formResponsesData.pagination.total : 0,
+        pendingResponses: formResponsesData.responses ? formResponsesData.responses.filter(r => r.status === 'pending').length : 0,
+        featuredProjects: Array.isArray(caseStudiesData) ? caseStudiesData.filter(cs => cs.featured).length : 0
+      });
+      
+      setRecentSubmissions(formResponsesData.responses || []);
+      
+    } catch (error) {
+      console.error('Error fetching dashboard data:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const statsData = [
     {
       title: "Total Case Studies",
-      value: "12",
+      value: stats.caseStudies,
       icon: "fas fa-briefcase",
       color: "primary",
-      change: "+2 this month"
+      change: "Active projects"
     },
     {
       title: "Form Submissions",
-      value: "47",
+      value: stats.formSubmissions,
       icon: "fas fa-envelope",
       color: "success",
-      change: "+15 this week"
+      change: "Total received"
     },
     {
       title: "Pending Responses",
-      value: "8",
+      value: stats.pendingResponses,
       icon: "fas fa-clock",
       color: "warning",
       change: "Needs attention"
     },
     {
       title: "Featured Projects",
-      value: "5",
+      value: stats.featuredProjects,
       icon: "fas fa-star",
       color: "info",
       change: "Active showcase"
     }
-  ];
-
-  const recentSubmissions = [
-    { name: "John Doe", email: "john@example.com", subject: "Project Inquiry", time: "2 hours ago" },
-    { name: "Sarah Johnson", email: "sarah@techstartup.com", subject: "Tech Partnership", time: "5 hours ago" },
-    { name: "Mike Chen", email: "mike@retailcorp.com", subject: "Free Tech Audit", time: "1 day ago" },
   ];
 
   return (
@@ -60,13 +97,19 @@ const AdminDashboard = () => {
 
       {/* Stats Cards */}
       <Row className="mb-4">
-        {stats.map((stat, index) => (
+        {statsData.map((stat, index) => (
           <Col md={6} lg={3} key={index} className="mb-3">
             <div className="stat-card">
               <div className={`stat-icon ${stat.color}`}>
                 <i className={stat.icon}></i>
               </div>
-              <h3 className="stat-number">{stat.value}</h3>
+              <h3 className="stat-number">
+                {loading ? (
+                  <i className="fas fa-spinner fa-spin"></i>
+                ) : (
+                  stat.value
+                )}
+              </h3>
               <p className="stat-label">{stat.title}</p>
               <small className="text-muted">{stat.change}</small>
             </div>
@@ -74,29 +117,85 @@ const AdminDashboard = () => {
         ))}
       </Row>
 
+      {/* Quick Actions */}
+      <Row className="mb-4">
+        <Col>
+          <div className="admin-card">
+            <div className="card-header">
+              <h5>
+                <i className="fas fa-bolt me-2"></i>
+                Quick Actions
+              </h5>
+            </div>
+            <div className="card-body">
+              <div className="d-flex gap-3 flex-wrap">
+                <Link href="/admin/case-studies/new" className="btn btn-primary">
+                  <i className="fas fa-plus me-2"></i>
+                  New Case Study
+                </Link>
+                <Link href="/admin/case-studies" className="btn btn-outline-primary">
+                  <i className="fas fa-briefcase me-2"></i>
+                  Manage Case Studies
+                </Link>
+                <Link href="/admin/form-responses" className="btn btn-outline-success">
+                  <i className="fas fa-envelope me-2"></i>
+                  View Form Responses
+                </Link>
+                <Button variant="outline-info" onClick={fetchDashboardData}>
+                  <i className="fas fa-sync-alt me-2"></i>
+                  Refresh Data
+                </Button>
+              </div>
+            </div>
+          </div>
+        </Col>
+      </Row>
+
       <Row>
         {/* Recent Submissions */}
         <Col lg={8} className="mb-4">
           <div className="admin-card">
-            <div className="card-header">
+            <div className="card-header d-flex justify-content-between align-items-center">
               <h5>
                 <i className="fas fa-inbox me-2"></i>
                 Recent Form Submissions
               </h5>
+              <Link href="/admin/form-responses" className="btn btn-sm btn-outline-primary">
+                View All
+              </Link>
             </div>
             <div className="list-group list-group-flush">
-              {recentSubmissions.map((submission, index) => (
-                <div key={index} className="list-group-item d-flex justify-content-between align-items-start">
-                  <div className="ms-2 me-auto">
-                    <div className="fw-bold">{submission.name}</div>
-                    <small className="text-muted">{submission.email}</small>
-                    <div className="mt-1">
-                      <span className="badge bg-primary rounded-pill">{submission.subject}</span>
-                    </div>
-                  </div>
-                  <small className="text-muted">{submission.time}</small>
+              {loading ? (
+                <div className="list-group-item text-center py-4">
+                  <i className="fas fa-spinner fa-spin me-2"></i>
+                  Loading submissions...
                 </div>
-              ))}
+              ) : recentSubmissions.length > 0 ? (
+                recentSubmissions.slice(0, 5).map((submission, index) => (
+                  <div key={index} className="list-group-item d-flex justify-content-between align-items-start">
+                    <div className="ms-2 me-auto">
+                      <div className="fw-bold">{submission.name}</div>
+                      <small className="text-muted">{submission.email}</small>
+                      <div className="mt-1">
+                        <span className="badge bg-primary rounded-pill">{submission.subject}</span>
+                        <span className={`badge ms-2 rounded-pill ${
+                          submission.status === 'pending' ? 'bg-warning' : 
+                          submission.status === 'responded' ? 'bg-success' : 'bg-secondary'
+                        }`}>
+                          {submission.status}
+                        </span>
+                      </div>
+                    </div>
+                    <small className="text-muted">
+                      {new Date(submission.createdAt).toLocaleDateString()}
+                    </small>
+                  </div>
+                ))
+              ) : (
+                <div className="list-group-item text-center py-4 text-muted">
+                  No form submissions yet
+                </div>
+              )}
             </div>
             <div className="card-footer text-center">
               <a href="/admin/responses" className="btn btn-outline-primary btn-sm">

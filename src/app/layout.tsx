@@ -14,7 +14,11 @@ const kanit = Kanit({
 export const metadata: Metadata = {
   title: 'Outlfy - Technology Agency',
   description: 'Custom software development and technology strategy solutions',
-  viewport: 'width=device-width, initial-scale=1',
+}
+
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
 }
 
 export default function RootLayout({
