@@ -16,26 +16,8 @@
           "link": "/techpartnership"
         },
         {
-          "name": "Ready-to-Deploy Products",
-          "link": "#",
-          "sub_dropdown_nav": [
-            {
-              "name": "E-commerce Suite",
-              "link": "/ecommerce"
-            },
-            {
-              "name": "Delivery System",
-              "link": "/ecommerce/delivery"
-            },
-            {
-              "name": "Inventory Management",
-              "link": "/ecommerce/inventory"
-            },
-            {
-              "name": "Website/Application",
-              "link": "/ecommerce/website"
-            }
-          ]
+          "name": "Commerce Solutions",
+          "link": "https://store.outlfy.com"
         },
         {
           "name": "Free Tech Audit",

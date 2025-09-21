@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { connectDB } from '@/lib/utils/database';
 import { checkAdminAuth } from '@/lib/adminAuth';
 import CaseStudy from '@/admin/models/CaseStudy';
+import { validateCaseStudyForAPI } from '@/lib/validation/caseStudyValidation';
 
 // Get a specific case study
 export async function GET(request, { params }) {
@@ -48,6 +49,19 @@ export async function PUT(request, { params }) {
     const { id } = await params;
     const data = await request.json();
     
+    // Server-side validation using shared utility
+    const { isValid, errors: validationErrors } = validateCaseStudyForAPI(data);
+    
+    if (!isValid) {
+      return NextResponse.json(
+        { 
+          error: 'Validation failed',
+          validationErrors 
+        },
+        { status: 400 }
+      );
+    }
+    
     // Update slug if title changed
     if (data.title && !data.slug) {
       data.slug = data.title
@@ -77,6 +91,21 @@ export async function PUT(request, { params }) {
     if (error.code === 11000) {
       return NextResponse.json(
         { error: 'A case study with this slug already exists' },
+        { status: 400 }
+      );
+    }
+    
+    // Handle mongoose validation errors
+    if (error.name === 'ValidationError') {
+      const validationErrors = {};
+      Object.keys(error.errors).forEach(key => {
+        validationErrors[key] = error.errors[key].message;
+      });
+      return NextResponse.json(
+        { 
+          error: 'Validation failed',
+          validationErrors 
+        },
         { status: 400 }
       );
     }

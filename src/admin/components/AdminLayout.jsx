@@ -21,6 +21,11 @@ const AdminLayout = ({ children }) => {
       icon: "fas fa-briefcase",
     },
     {
+      name: "Testimonials",
+      href: "/admin/testimonials",
+      icon: "fas fa-star",
+    },
+    {
       name: "Form Responses",
       href: "/admin/responses",
       icon: "fas fa-envelope",

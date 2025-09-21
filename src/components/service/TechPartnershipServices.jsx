@@ -67,11 +67,11 @@ const TechPartnershipServices = () => {
             <div className="col-xxl-12">
               <div className="service__items-7 animation_service_7">
                 <div className="service__item-7">
-                  <Link href="/service-details">
+                  <div>
                     <h3 className="service__title-7">
                       Strategic Tech <span>Audit</span>
                     </h3>
-                  </Link>
+                  </div>
                   <p>
                     Uncover hidden inefficiencies and prioritize high-ROI solutions tailored to your budget and goals.
                   </p>
@@ -82,11 +82,11 @@ const TechPartnershipServices = () => {
                   </ul>
                 </div>
                 <div className="service__item-7">
-                  <Link href="/service-details">
+                  <div>
                     <h3 className="service__title-7">
                       Data-Driven <span>Roadmap</span>{" "}
                     </h3>
-                  </Link>
+                  </div>
                   <p>
                     Turn business insights into actionable tech priorities—no guesswork, just measurable impact.
                   </p>
@@ -97,11 +97,11 @@ const TechPartnershipServices = () => {
                   </ul>
                 </div>
                 <div className="service__item-7">
-                  <Link href="/service-details">
+                  <div>
                     <h3 className="service__title-7">
                       Custom Ecosystem <span>Build</span>{" "}
                     </h3>
-                  </Link>
+                  </div>
                   <p>
                     Develop tailored software that solves your core problems—not our preset solutions.
                   </p>
@@ -112,11 +112,11 @@ const TechPartnershipServices = () => {
                   </ul>
                 </div>
                 <div className="service__item-7">
-                  <Link href="/service-details">
+                  <div>
                     <h3 className="service__title-7">
                       Ongoing <span>Optimization</span>{" "}
                     </h3>
-                  </Link>
+                  </div>
                   <p>
                     Continuously refine your tech with performance analytics and proactive upgrades.
                   </p>
@@ -127,11 +127,11 @@ const TechPartnershipServices = () => {
                   </ul>
                 </div>
                 <div className="service__item-7">
-                  <Link href="/service-details">
+                  <div>
                     <h3 className="service__title-7">
                       Team <span>Enablement</span>
                     </h3>
-                  </Link>
+                  </div>
                   <p>
                     Train your staff and embed best practices—no dependency on external developers.
                   </p>
@@ -142,11 +142,11 @@ const TechPartnershipServices = () => {
                   </ul>
                 </div>
                 <div className="service__item-7">
-                  <Link href="/service-details">
+                  <div>
                     <h3 className="service__title-7">
                       Growth <span>Partnership</span>{" "}
                     </h3>
-                  </Link>
+                  </div>
                   <p>
                     Quarterly strategy sessions to align tech with your evolving business vision.
                   </p>

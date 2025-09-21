@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import RootLayout from "@/components/common/layout/RootLayout";
 import CaseStudyDetail from "@/components/casestudy/CaseStudyDetail";
 import { CaseStudy } from '@/types/case-study';
-
+export const dynamic = "force-dynamic";
 interface CaseStudyPageProps {
   params: Promise<{
     slug: string;
@@ -13,7 +13,7 @@ interface CaseStudyPageProps {
 async function getCaseStudy(slug: string): Promise<CaseStudy | null> {
   try {
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'}/api/case-studies/${encodeURIComponent(slug)}`,
+      `/api/case-studies/${encodeURIComponent(slug)}`,
       {
         cache: 'no-store', // Ensure fresh data
       }

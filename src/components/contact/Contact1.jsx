@@ -113,7 +113,7 @@ const Contact1 = () => {
                   <li>
                     <span>
                       Prefer to book directly? <br />
-                      <a href="#" className="text-decoration-underline">
+                      <a href="https://calendly.com/gaashish575/free-45-min-consultancy-with-outlfy" target="_blank" className="text-decoration-underline">
                         👉 Schedule Your Free 45-Min Consultancy →
                       </a>
                     </span>

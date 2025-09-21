@@ -5,7 +5,7 @@ import { ScrollTrigger } from "@/plugins";
 import Link from "next/link";
 import Service11 from "../../../public/assets/imgs/tecp(3).jpg";
 import Service12 from "../../../public/assets/imgs/tecp(2).jpg";
-import Service13 from "../../../public/assets/imgs/tecp(1).png";
+import Service13 from "../../../public/assets/imgs/123.jpg";
 import Service14 from "../../../public/assets/imgs/tecp(1).jpg";
 import Image from "next/image";
 
@@ -233,8 +233,7 @@ const IdealPartnerProfile = () => {
               </div>
               <div className="col-xxl-8 col-xl-8 col-lg-12 col-md-12">
                 <div className="service__list" ref={serviceList}>
-                  <Link
-                    href="/contact"
+                  <div
                     className={activeList == 1 ? "active" : ""}
                     data-service="1"
                   >
@@ -258,10 +257,9 @@ const IdealPartnerProfile = () => {
                         </p>
                       </div>
                     </div>
-                  </Link>
+                  </div>
 
-                  <Link
-                    href="/contact"
+                  <div
                     className={activeList == 2 ? "active" : ""}
                     data-service="2"
                   >
@@ -285,10 +283,10 @@ const IdealPartnerProfile = () => {
                         </p>
                       </div>
                     </div>
-                  </Link>
+                  </div>
 
-                  <Link
-                    href="/contact"
+                  <div
+                   
                     className={activeList == 3 ? "active" : ""}
                     data-service="3"
                   >
@@ -298,7 +296,7 @@ const IdealPartnerProfile = () => {
                       </div>
                       <div className="service__title-wrapper">
                         <h4 className="service__title">
-                          Tech-Forward Leaders
+                          Tech-Forward<br/> Leaders
                         </h4>
                       </div>
                       <div className="service__text">
@@ -312,10 +310,9 @@ const IdealPartnerProfile = () => {
                         </p>
                       </div>
                     </div>
-                  </Link>
+                  </div>
 
-                  <Link
-                    href="/contact"
+                  <div
                     className={activeList == 4 ? "active" : ""}
                     data-service="4"
                   >
@@ -339,7 +336,7 @@ const IdealPartnerProfile = () => {
                         </p>
                       </div>
                     </div>
-                  </Link>
+                  </div>
                 </div>
               </div>
             </div>

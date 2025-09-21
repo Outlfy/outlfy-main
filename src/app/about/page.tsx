@@ -5,14 +5,13 @@ export const metadata: Metadata = {
   description: 'Learn about Outlfy, our mission, vision, and how we help businesses succeed with technology',
 };
 
-import DigitalAgencyBrand from "@/components/brand/DigitalAgencyBrand";
 import RootLayout from "@/components/common/layout/RootLayout";
 import AboutCounter from "@/components/counter/AboutCounter";
 import AboutCTA from "@/components/cta/AboutCTA";
 import AboutHero from "@/components/hero/AboutHero";
 import AboutStory from "@/components/story/AboutStory";
-import AboutTeam from "@/components/team/AboutTeam";
 import AboutTestimonial from "@/components/testimonial/AboutTestimonial";
+import DigitalAgencyBrand from '@/components/brand/DigitalAgencyBrand';
 
 
 const About = () => {

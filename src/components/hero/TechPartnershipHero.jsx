@@ -7,6 +7,23 @@ import Shape3 from "../../../public/assets/imgs/home-7/shape-3.png";
 const TechPartnershipHero = () => {
   return (
     <>
+      <style jsx>{`
+        .animated-text {
+          animation: fadeInUp 1s ease-out;
+          animation-fill-mode: both;
+        }
+        
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      `}</style>
       <section className="hero__area-7">
         <div className="container">
           <div className="row">
@@ -21,7 +38,7 @@ const TechPartnershipHero = () => {
                     src={Shape1}
                     alt="shape"
                   />{" "}
-                  Tech Partnership{" "}
+                  <span className="animated-text">Tech Partnership</span>{" "}
                   <Image
                     priority
                     width={125}
@@ -31,7 +48,7 @@ const TechPartnershipHero = () => {
                   />
                 </h1>
               </div>
-              <div className="hero__text-7">
+              <div className="hero__text-7 mt-0">
                 <h2 className="about">Strategic Alliance -----</h2>
                 <p>
                   We become your strategic tech ally—auditing, building, and scaling your digital ecosystem so you save costs, make data-driven decisions, and focus 100% on growth.

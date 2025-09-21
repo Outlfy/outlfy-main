@@ -74,7 +74,7 @@ const Canvas = ({ bladeMode = "", ofCanvasArea }) => {
                   <a href="https://www.instagram.com/outlfy_business_coach/">Instagram</a>
                 </li>
                 <li>
-                  <a href="https://www.instagram.com/outlfy_business_coach/">Facebook</a>
+                  <a href="https://www.facebook.com/Outlfy/">Facebook</a>
                 </li>
                 <li>
                   <a href="https://x.com/outlfy"> X (Twitter)</a>
@@ -138,36 +138,10 @@ const Canvas = ({ bladeMode = "", ofCanvasArea }) => {
                       </li>
                       <li className="sub_header_title">
                         <div className="d-flex justify-content-between">
-                          <Link href={"#"}>Ready-to-Deploy Products</Link>
-                          <div className="sub-accordian-btn">
-                            {subAccordion === 2.1 ? (
-                              <a onClick={() => openSubData(2)}>-</a>
-                            ) : (
-                              <a onClick={() => openSubData(2.1)}>+</a>
-                            )}
-                          </div>
+                          <Link href={"https://store.outlfy.com"}>E-commerce Solutions</Link>
+
                         </div>
-                        <ul
-                          className="sub_title_2"
-                          style={
-                            subAccordion === 2.1
-                              ? { display: "" }
-                              : { display: "none" }
-                          }
-                        >
-                          <li>
-                            <Link href={"/ecommerce"}>E-commerce Suite</Link>
-                          </li>
-                          <li>
-                            <Link href={"/ecommerce/delivery"}>Delivery System</Link>
-                          </li>
-                          <li>
-                            <Link href={"/ecommerce/inventory"}>Inventory Management</Link>
-                          </li>
-                          <li>
-                            <Link href={"/ecommerce/website"}>Website/Application</Link>
-                          </li>
-                        </ul>
+                       
                       </li>
                       <li>
                         <Link href={"/techaudit"} className="highlight-link">Free Tech Audit</Link>

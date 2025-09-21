@@ -141,16 +141,16 @@ export default function Footer1() {
             <div className="footer__social-3">
               <ul>
                 <li>
-                  <a href="https://www.instagram.com/outlfy_business_coach/">facebook</a>
+                  <a href="https://www.linkedin.com/company/outlfy">Linkedin</a>
                 </li>
                 <li>
                   <a href="https://x.com/outlfy">X (Twitter)</a>
                 </li>
                 <li>
-                  <a href="https://www.linkedin.com/company/outlfy">Linkedin</a>
+                  <a href="https://www.instagram.com/outlfy_business_coach/">Instagram</a>
                 </li>
                 <li>
-                  <a href="https://www.instagram.com/outlfy_business_coach/">Instagram</a>
+                  <a href="https://www.facebook.com/Outlfy/">facebook</a>
                 </li>
               </ul>
             </div>

@@ -117,16 +117,17 @@ const DigitalMarketingHero = () => {
         </div>
         <div className="wrapper" ref={wrapper}>
           <div className="video-info">
-            <div className="video-intro">
-              <input
+            <div className="video-introw">
+              <div
                 id="video_check"
                 type="checkbox"
                 ref={videoCheck}
                 onClick={openVideo}
               />
               <div className="intro-title">
-                <h4 className="video-title" ref={videoTitle}>
-                  ▶ WATCH <span>HOW IT WORKS</span>
+                <h4 className="video-title" style={{marginLeft: "-80px"}} ref={videoTitle}>
+                  {/* ▶ WATCH <span>HOW IT WORKS</span> */}
+                   We are here <span>to solve your tech problems</span>
                 </h4>
                 <h4
                   className="video-title close-video-title"
@@ -135,7 +136,7 @@ const DigitalMarketingHero = () => {
                   Close <span>video</span>
                 </h4>
               </div>
-              <div className="video">
+              {/* <div className="video">
                 <video
                   src="assets/video/hero-3.mp4"
                   loop
@@ -143,7 +144,7 @@ const DigitalMarketingHero = () => {
                   autoPlay
                   playsInline
                 ></video>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>

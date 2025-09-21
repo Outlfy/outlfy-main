@@ -46,9 +46,9 @@ const TechPartnershipCTA = () => {
           <div className="line-3"></div>
           <div className="row">
             <div className="col-xxl-12">
-              <div className="cta__content">
-                <p className="cta__sub-title">Stop Overpaying for Disconnected Tech Band-Aids</p>
-                <h2 className="cta__title title-anim">
+              <div className="cta__content w-100">
+                <p className="cta__sub-title">Stop Overpaying for Disconnected Tech - that dont gives you returns</p>
+                <h2 className="cta__title w-100">
                   Let's build your custom growth ecosystem—start with a free 45-minute audit.
                 </h2>
                 <div className="btn_wrapper">
@@ -62,7 +62,7 @@ const TechPartnershipCTA = () => {
                 <div className="cta__urgency pt-30">
                   <p className="urgency-text">
                     <span className="urgency-badge">⏰</span>
-                    Only 5 audit slots available this week
+                    Hurry Up! Only 5 slots available this month! Don't miss out.
                   </p>
                 </div>
               </div>

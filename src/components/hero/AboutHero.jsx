@@ -41,7 +41,7 @@ const AboutHero = () => {
                       }
                     </p>
                   </div>
-                  <div className="hero__about-award">
+                  {/* <div className="hero__about-award">
                     <Image
                       priority
                       width={126}
@@ -49,7 +49,7 @@ const AboutHero = () => {
                       src={Award}
                       alt="Best Studio Award"
                     />
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>

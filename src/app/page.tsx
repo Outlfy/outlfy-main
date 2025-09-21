@@ -10,11 +10,8 @@ import DigitalMarketingHero from "@/components/hero/DigitalMarketingHero";
 import DigitalMarketingBrand from "@/components/brand/DigitalMarketingBrand";
 import DigitalMarketingAbout from "@/components/about/DigitalMarketingAbout";
 import DigitalMarketingService from "@/components/service/DigitalMarketingService";
-import DigitalMarketingProtfolio from "@/components/portfolio/DigitalMarketingProtfolio";
-import DigitalMarketingTestimonial from "@/components/testimonial/DigitalMarketingTestimonial";
 import DigitalMarketingWorkflow from "@/components/workflow/DigitalMarketingWorkflow";
-import DigitalMarketingPrice from "@/components/price/DigitalMarketingPrice";
-import DigitalMarketingBlog from "@/components/blog/DigitalMarketingBlog";
+import TestimonialGrid from '@/components/testimonials/TestimonialGridHome';
 
 export default function DigitalMarketing() {
   return (
@@ -24,7 +21,8 @@ export default function DigitalMarketing() {
         <DigitalMarketingBrand />
         <DigitalMarketingAbout />
         <DigitalMarketingService />
-        <DigitalMarketingProtfolio />
+        <TestimonialGrid/>
+        {/* <DigitalMarketingProtfolio /> */}
         {/* <DigitalMarketingTestimonial /> */}
         <DigitalMarketingWorkflow />
         {/* <DigitalMarketingPrice /> */}

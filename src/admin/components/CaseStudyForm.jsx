@@ -3,6 +3,52 @@ import React, { useState, useEffect } from "react";
 import { Button, Form, Accordion, Row, Col, Alert, Tab, Tabs, Badge } from "react-bootstrap";
 import { authUtils } from "@/lib/authUtils";
 import TipTapEditor from "./TipTapEditor";
+import { 
+  validateField, 
+  validateCaseStudy, 
+  getNestedValue, 
+  setNestedValue 
+} from "@/lib/validation/caseStudyValidation";
+
+// Add required field styling
+const styles = `
+  .required::after {
+    content: "";
+  }
+  .form-control.is-invalid {
+    border-color: #dc3545;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+  }
+  .form-control.is-valid {
+    border-color: #198754;
+    box-shadow: 0 0 0 0.2rem rgba(25, 135, 84, 0.25);
+  }
+  .invalid-feedback {
+    display: block;
+    font-size: 0.875em;
+    color: #dc3545;
+    margin-top: 0.25rem;
+  }
+  .validation-summary {
+    background: #f8d7da;
+    border: 1px solid #f5c6cb;
+    border-radius: 0.375rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+  }
+  .validation-summary h6 {
+    color: #721c24;
+    margin-bottom: 0.5rem;
+  }
+  .validation-summary ul {
+    margin: 0;
+    padding-left: 1.5rem;
+  }
+  .validation-summary li {
+    color: #721c24;
+    margin-bottom: 0.25rem;
+  }
+`;
 
 const sectionFields = [
   { key: "theProblem", label: "The Problem", icon: "fas fa-exclamation-triangle" },
@@ -32,6 +78,47 @@ const statusOptions = [
 const technologyCategories = [
   'frontend', 'backend', 'database', 'devops', 'design', 'other'
 ];
+
+// Validation-aware input component
+const ValidatedFormControl = ({ 
+  name, 
+  label, 
+  required = false, 
+  error, 
+  touched, 
+  onBlur, 
+  helpText,
+  children,
+  ...props 
+}) => {
+  const hasError = touched && error;
+  
+  return (
+    <Form.Group className="mb-3">
+      <Form.Label className={required ? "required" : ""}>
+        {label}
+        {required && <span className="text-danger ms-1">*</span>}
+      </Form.Label>
+      {children || (
+        <Form.Control
+          name={name}
+          onBlur={onBlur}
+          isInvalid={hasError}
+          isValid={touched && !error}
+          {...props}
+        />
+      )}
+      {helpText && !hasError && (
+        <Form.Text className="text-muted">{helpText}</Form.Text>
+      )}
+      {hasError && (
+        <Form.Control.Feedback type="invalid">
+          {error}
+        </Form.Control.Feedback>
+      )}
+    </Form.Group>
+  );
+};
 
 const CaseStudyForm = ({ selected, onSave, onCancel }) => {
   const [form, setForm] = useState({
@@ -98,6 +185,43 @@ const CaseStudyForm = ({ selected, onSave, onCancel }) => {
   const [newTechnology, setNewTechnology] = useState({ name: "", category: "frontend", icon: "", url: "" });
   const [newMetric, setNewMetric] = useState({ label: "", value: "", description: "" });
   const [imageUploading, setImageUploading] = useState(false);
+  
+  // Validation state
+  const [errors, setErrors] = useState({});
+  const [touched, setTouched] = useState({});
+  const [isValidating, setIsValidating] = useState(false);
+
+  // Validate entire form using shared utility
+  const validateForm = (formData = form) => {
+    const { isValid, errors: validationErrors } = validateCaseStudy(formData);
+    setErrors(validationErrors);
+    return isValid;
+  };
+
+  // Handle field blur for validation
+  const handleBlur = (e) => {
+    const { name } = e.target;
+    setTouched(prev => ({ ...prev, [name]: true }));
+    
+    const value = getNestedValue(form, name);
+    const error = validateField(name, value);
+    
+    setErrors(prev => {
+      const newErrors = { ...prev };
+      if (error) {
+        setNestedValue(newErrors, name, error);
+      } else {
+        // Remove error if field is now valid
+        const keys = name.split('.');
+        const lastKey = keys.pop();
+        const target = keys.reduce((current, key) => current?.[key], newErrors);
+        if (target && target[lastKey]) {
+          delete target[lastKey];
+        }
+      }
+      return newErrors;
+    });
+  };
 
   useEffect(() => {
     if (selected) {
@@ -146,6 +270,47 @@ const CaseStudyForm = ({ selected, onSave, onCancel }) => {
         ...prev, 
         [name]: type === 'checkbox' ? checked : value 
       }));
+    }
+
+    // Auto-generate slug from title
+    if (name === 'title') {
+      const slugValue = value
+        .toLowerCase()
+        .replace(/[^a-z0-9\s-]/g, '')
+        .replace(/\s+/g, '-')
+        .replace(/-+/g, '-')
+        .trim();
+      
+      setForm((prev) => ({ ...prev, slug: slugValue }));
+      
+      // Validate slug as well
+      const slugError = validateField('slug', slugValue);
+      setErrors(prev => ({
+        ...prev,
+        slug: slugError
+      }));
+    }
+
+    // Real-time validation for touched fields
+    if (touched[name]) {
+      const fieldValue = type === 'checkbox' ? checked : value;
+      const error = validateField(name, fieldValue);
+      
+      setErrors(prev => {
+        const newErrors = { ...prev };
+        if (error) {
+          setNestedValue(newErrors, name, error);
+        } else {
+          // Remove error if field is now valid
+          const keys = name.split('.');
+          const lastKey = keys.pop();
+          const target = keys.reduce((current, key) => current?.[key], newErrors);
+          if (target && target[lastKey]) {
+            delete target[lastKey];
+          }
+        }
+        return newErrors;
+      });
     }
   };
 
@@ -309,6 +474,36 @@ const CaseStudyForm = ({ selected, onSave, onCancel }) => {
     e.preventDefault();
     setLoading(true);
     setMessage({ type: "", text: "" });
+    setIsValidating(true);
+
+    // Validate entire form before submission
+    const isValid = validateForm();
+    
+    if (!isValid) {
+      setLoading(false);
+      setIsValidating(false);
+      setMessage({ 
+        type: "danger", 
+        text: "Please fix the validation errors before submitting." 
+      });
+      
+      // Find first tab with errors and switch to it
+      const errorFields = Object.keys(errors);
+      if (errorFields.length > 0) {
+        const firstError = errorFields[0];
+        if (['title', 'slug', 'summary', 'excerpt', 'clientName', 'projectType'].includes(firstError)) {
+          setActiveTab('basic');
+        } else if (firstError.startsWith('timeline') || firstError.includes('budget')) {
+          setActiveTab('project');
+        } else if (firstError.includes('seo')) {
+          setActiveTab('seo');
+        } else if (['theProblem', 'whatWeBuilt', 'howWeDidIt', 'theResults'].some(s => firstError.includes(s))) {
+          setActiveTab('content');
+        }
+      }
+      
+      return;
+    }
 
     try {
       const url = selected 
@@ -325,23 +520,37 @@ const CaseStudyForm = ({ selected, onSave, onCancel }) => {
       if (response.ok) {
         const result = await response.json();
         setMessage({ type: "success", text: `Case study ${selected ? 'updated' : 'created'} successfully!` });
+        
+        // Clear errors on successful save
+        setErrors({});
+        setTouched({});
+        
         if (onSave) {
           setTimeout(() => onSave(result), 1500); // Delay to show success message
         }
       } else {
         const errorData = await response.json();
-        throw new Error(errorData.error || 'Failed to save case study');
+        
+        // Handle validation errors from server
+        if (errorData.validationErrors) {
+          setErrors(errorData.validationErrors);
+          setMessage({ type: "danger", text: "Please fix the validation errors and try again." });
+        } else {
+          throw new Error(errorData.error || 'Failed to save case study');
+        }
       }
     } catch (error) {
       console.error('Error saving case study:', error);
       setMessage({ type: "danger", text: error.message || "Error saving case study. Please try again." });
     } finally {
       setLoading(false);
+      setIsValidating(false);
     }
   };
 
   return (
     <div className="admin-form">
+      <style>{styles}</style>
       <div className="d-flex justify-content-between align-items-center mb-4">
         <h4>
           <i className="fas fa-briefcase me-2"></i>
@@ -358,6 +567,24 @@ const CaseStudyForm = ({ selected, onSave, onCancel }) => {
               <i className="fas fa-times me-1"></i> Cancel
             </Button>
           )}
+          <Button 
+            type="submit" 
+            form="case-study-form"
+            variant="primary" 
+            disabled={loading || isValidating}
+          >
+            {loading ? (
+              <>
+                <span className="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+                {selected ? 'Updating...' : 'Creating...'}
+              </>
+            ) : (
+              <>
+                <i className="fas fa-save me-1"></i>
+                {selected ? 'Update' : 'Create'} Case Study
+              </>
+            )}
+          </Button>
         </div>
       </div>
 
@@ -367,63 +594,81 @@ const CaseStudyForm = ({ selected, onSave, onCancel }) => {
         </Alert>
       )}
 
-      <Form onSubmit={handleSubmit}>
+      {/* Validation Summary */}
+      {Object.keys(errors).length > 0 && (
+        <div className="validation-summary">
+          <h6><i className="fas fa-exclamation-triangle me-2"></i>Please fix the following errors:</h6>
+          <ul>
+            {Object.entries(errors).map(([field, error]) => (
+              <li key={field}>
+                <strong>{field.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase())}:</strong> {error}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+
+      <Form id="case-study-form" onSubmit={handleSubmit}>
         <Tabs activeKey={activeTab} onSelect={setActiveTab} className="mb-4">
           {/* Basic Information Tab */}
           <Tab eventKey="basic" title={<><i className="fas fa-info-circle me-1"></i> Basic Info</>}>
             <Row className="mb-3">
               <Col md={8}>
-                <Form.Group className="mb-3">
-                  <Form.Label>Title *</Form.Label>
-                  <Form.Control 
-                    name="title" 
-                    value={form.title} 
-                    onChange={handleChange} 
-                    required 
-                    placeholder="Enter case study title"
-                  />
-                </Form.Group>
+                <ValidatedFormControl
+                  name="title"
+                  label="Title"
+                  required
+                  value={form.title}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  error={errors.title}
+                  touched={touched.title}
+                  placeholder="Enter case study title"
+                />
               </Col>
               <Col md={4}>
-                <Form.Group className="mb-3">
-                  <Form.Label>Slug *</Form.Label>
-                  <Form.Control 
-                    name="slug" 
-                    value={form.slug} 
-                    onChange={handleChange} 
-                    required 
-                    placeholder="url-friendly-name"
-                  />
-                </Form.Group>
+                <ValidatedFormControl
+                  name="slug"
+                  label="Slug"
+                  required
+                  value={form.slug}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  error={errors.slug}
+                  touched={touched.slug}
+                  placeholder="url-friendly-name"
+                  helpText="Auto-generated from title. Use lowercase letters, numbers, and hyphens only."
+                />
               </Col>
             </Row>
 
-            <Form.Group className="mb-3">
-              <Form.Label>Summary</Form.Label>
-              <Form.Control 
-                as="textarea" 
-                rows={3}
-                name="summary" 
-                value={form.summary} 
-                onChange={handleChange} 
-                placeholder="Brief summary of the case study"
-              />
-            </Form.Group>
+            <ValidatedFormControl
+              name="summary"
+              label="Summary"
+              as="textarea"
+              rows={3}
+              value={form.summary}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={errors.summary}
+              touched={touched.summary}
+              placeholder="Brief summary of the case study"
+              helpText={`${(form.summary || '').length}/1000 characters`}
+            />
 
-            <Form.Group className="mb-3">
-              <Form.Label>Excerpt</Form.Label>
-              <Form.Control 
-                as="textarea" 
-                rows={2}
-                name="excerpt" 
-                value={form.excerpt} 
-                onChange={handleChange} 
-                placeholder="Short excerpt for previews (auto-generated from summary if empty)"
-              />
-              <Form.Text className="text-muted">
-                {(form.excerpt || '').length}/300 characters
-              </Form.Text>
-            </Form.Group>
+            <ValidatedFormControl
+              name="excerpt"
+              label="Excerpt"
+              as="textarea"
+              rows={2}
+              value={form.excerpt}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={errors.excerpt}
+              touched={touched.excerpt}
+              placeholder="Short excerpt for previews (auto-generated from summary if empty)"
+              helpText={`${(form.excerpt || '').length}/300 characters`}
+            />
 
             {/* Featured Image */}
             <Form.Group className="mb-4">
@@ -609,112 +854,136 @@ const CaseStudyForm = ({ selected, onSave, onCancel }) => {
             {/* Client Information */}
             <Row className="mb-3">
               <Col md={6}>
-                <Form.Group className="mb-3">
-                  <Form.Label>Client Name *</Form.Label>
-                  <Form.Control 
-                    name="clientName" 
-                    value={form.clientName} 
-                    onChange={handleChange} 
-                    required 
-                    placeholder="Client company name"
-                  />
-                </Form.Group>
+                <ValidatedFormControl
+                  name="clientName"
+                  label="Client Name"
+                  required
+                  value={form.clientName}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  error={errors.clientName}
+                  touched={touched.clientName}
+                  placeholder="Client company name"
+                />
               </Col>
               <Col md={3}>
-                <Form.Group className="mb-3">
-                  <Form.Label>Client Logo URL</Form.Label>
-                  <Form.Control 
-                    name="clientLogo" 
-                    value={form.clientLogo} 
-                    onChange={handleChange} 
-                    placeholder="Logo URL"
-                  />
-                </Form.Group>
+                <ValidatedFormControl
+                  name="clientLogo"
+                  label="Client Logo URL"
+                  value={form.clientLogo}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  error={errors.clientLogo}
+                  touched={touched.clientLogo}
+                  placeholder="Logo URL"
+                />
               </Col>
               <Col md={3}>
-                <Form.Group className="mb-3">
-                  <Form.Label>Client Website</Form.Label>
-                  <Form.Control 
-                    name="clientWebsite" 
-                    value={form.clientWebsite} 
-                    onChange={handleChange} 
-                    placeholder="https://client.com"
-                  />
-                </Form.Group>
+                <ValidatedFormControl
+                  name="clientWebsite"
+                  label="Client Website"
+                  value={form.clientWebsite}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  error={errors.clientWebsite}
+                  touched={touched.clientWebsite}
+                  placeholder="https://client.com"
+                  helpText="Must be a valid URL"
+                />
               </Col>
             </Row>
 
             <Row className="mb-3">
               <Col md={4}>
-                <Form.Group className="mb-3">
-                  <Form.Label>Project Type</Form.Label>
-                  <Form.Select name="projectType" value={form.projectType} onChange={handleChange}>
+                <ValidatedFormControl
+                  name="projectType"
+                  label="Project Type"
+                  required
+                  error={errors.projectType}
+                  touched={touched.projectType}
+                  onBlur={handleBlur}
+                >
+                  <Form.Select 
+                    name="projectType" 
+                    value={form.projectType} 
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    isInvalid={touched.projectType && errors.projectType}
+                    isValid={touched.projectType && !errors.projectType}
+                  >
                     <option value="">Select project type</option>
                     {projectTypes.map(type => (
                       <option key={type} value={type}>{type}</option>
                     ))}
                   </Form.Select>
-                </Form.Group>
+                </ValidatedFormControl>
               </Col>
               <Col md={4}>
-                <Form.Group className="mb-3">
-                  <Form.Label>Industry</Form.Label>
-                  <Form.Control 
-                    name="industry" 
-                    value={form.industry} 
-                    onChange={handleChange} 
-                    placeholder="e.g., Healthcare, Fintech"
-                  />
-                </Form.Group>
+                <ValidatedFormControl
+                  name="industry"
+                  label="Industry"
+                  value={form.industry}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  error={errors.industry}
+                  touched={touched.industry}
+                  placeholder="e.g., Healthcare, Fintech"
+                />
               </Col>
               <Col md={4}>
-                <Form.Group className="mb-3">
-                  <Form.Label>Team Size</Form.Label>
-                  <Form.Control 
-                    type="number"
-                    name="teamSize" 
-                    value={form.teamSize} 
-                    onChange={handleChange} 
-                    placeholder="Number of team members"
-                  />
-                </Form.Group>
+                <ValidatedFormControl
+                  name="teamSize"
+                  label="Team Size"
+                  type="number"
+                  value={form.teamSize}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  error={errors.teamSize}
+                  touched={touched.teamSize}
+                  placeholder="Number of team members"
+                  helpText="Enter a number between 1 and 100"
+                />
               </Col>
             </Row>
 
             {/* Timeline */}
             <Row className="mb-3">
               <Col md={4}>
-                <Form.Group className="mb-3">
-                  <Form.Label>Start Date</Form.Label>
-                  <Form.Control 
-                    type="date" 
-                    name="timeline.start" 
-                    value={form.timeline?.start || ''} 
-                    onChange={handleChange} 
-                  />
-                </Form.Group>
+                <ValidatedFormControl
+                  name="timeline.start"
+                  label="Start Date"
+                  type="date"
+                  value={form.timeline?.start || ''}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  error={errors['timeline.start']}
+                  touched={touched['timeline.start']}
+                />
               </Col>
               <Col md={4}>
-                <Form.Group className="mb-3">
-                  <Form.Label>End Date</Form.Label>
-                  <Form.Control 
-                    type="date" 
-                    name="timeline.end" 
-                    value={form.timeline?.end || ''} 
-                    onChange={handleChange} 
-                  />
-                </Form.Group>
+                <ValidatedFormControl
+                  name="timeline.end"
+                  label="End Date"
+                  type="date"
+                  value={form.timeline?.end || ''}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  error={errors['timeline.end']}
+                  touched={touched['timeline.end']}
+                />
               </Col>
               <Col md={4}>
-                <Form.Group className="mb-3">
-                  <Form.Label>Duration</Form.Label>
-                  <Form.Control 
-                    name="timeline.duration" 
-                    value={form.timeline?.duration || ''} 
-                    onChange={handleChange} 
-                    placeholder="e.g., 8 weeks, 3 months"
-                  />
-                </Form.Group>
+                <ValidatedFormControl
+                  name="timeline.duration"
+                  label="Duration"
+                  value={form.timeline?.duration || ''}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  error={errors['timeline.duration']}
+                  touched={touched['timeline.duration']}
+                  placeholder="e.g., 8 weeks, 3 months"
+                  helpText="Auto-calculated from dates or enter manually"
+                />
               </Col>
             </Row>
 
@@ -812,63 +1081,125 @@ const CaseStudyForm = ({ selected, onSave, onCancel }) => {
           {/* Content Sections Tab */}
           <Tab eventKey="content" title={<><i className="fas fa-edit me-1"></i> Content</>}>
             <Accordion defaultActiveKey="0" className="mb-4">
-              {sectionFields.map(({ key, label, icon }, idx) => (
-                <Accordion.Item eventKey={String(idx)} key={key}>
-                  <Accordion.Header>
-                    <i className={`${icon} me-2`}></i>
-                    {label}
-                  </Accordion.Header>
-                  <Accordion.Body>
-                    <Form.Group className="mb-3">
-                      <Form.Label>Section Heading</Form.Label>
-                      <Form.Control 
-                        name={`${key}.heading`} 
-                        value={form[key]?.heading || ''} 
-                        onChange={handleChange} 
+              {sectionFields.map(({ key, label, icon }, idx) => {
+                const isRequired = ['theProblem', 'whatWeBuilt', 'howWeDidIt', 'theResults'].includes(key);
+                const headingError = errors[`${key}.heading`];
+                const contentError = errors[`${key}.content`];
+                const headingTouched = touched[`${key}.heading`];
+                const contentTouched = touched[`${key}.content`];
+                
+                return (
+                  <Accordion.Item eventKey={String(idx)} key={key}>
+                    <Accordion.Header>
+                      <i className={`${icon} me-2`}></i>
+                      {label}
+                      {isRequired && <span className="text-danger ms-1">*</span>}
+                      {(headingError || contentError) && (
+                        <i className="fas fa-exclamation-triangle text-danger ms-2" title="This section has validation errors"></i>
+                      )}
+                    </Accordion.Header>
+                    <Accordion.Body>
+                      <ValidatedFormControl
+                        name={`${key}.heading`}
+                        label="Section Heading"
+                        required={isRequired}
+                        value={form[key]?.heading || ''}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        error={headingError}
+                        touched={headingTouched}
                         placeholder={`Enter heading for ${label}`}
                       />
-                    </Form.Group>
-                    <Form.Group className="mb-3">
-                      <Form.Label>Content</Form.Label>
-                      <TipTapEditor
-                        content={form[key]?.content || ''}
-                        onChange={(content) => handleContentChange(key, content)}
-                        placeholder={`Enter content for ${label}...`}
-                      />
-                    </Form.Group>
-                    <Form.Group>
-                      <Form.Label>Excerpt (Optional)</Form.Label>
-                      <Form.Control 
+                      
+                      <Form.Group className="mb-3">
+                        <Form.Label className={isRequired ? "required" : ""}>
+                          Content
+                          {isRequired && <span className="text-danger ms-1">*</span>}
+                        </Form.Label>
+                        <TipTapEditor
+                          content={form[key]?.content || ''}
+                          onChange={(content) => {
+                            handleContentChange(key, content);
+                            // Validate content on change if touched
+                            if (touched[`${key}.content`]) {
+                              const error = validateField(`${key}.content`, content);
+                              setErrors(prev => ({
+                                ...prev,
+                                [`${key}.content`]: error
+                              }));
+                            }
+                          }}
+                          onBlur={() => {
+                            setTouched(prev => ({ ...prev, [`${key}.content`]: true }));
+                            const error = validateField(`${key}.content`, form[key]?.content);
+                            setErrors(prev => ({
+                              ...prev,
+                              [`${key}.content`]: error
+                            }));
+                          }}
+                          placeholder={`Enter content for ${label}...`}
+                        />
+                        {contentTouched && contentError && (
+                          <div className="invalid-feedback" style={{ display: 'block' }}>
+                            {contentError}
+                          </div>
+                        )}
+                      </Form.Group>
+                      
+                      <ValidatedFormControl
+                        name={`${key}.excerpt`}
+                        label="Excerpt (Optional)"
                         as="textarea"
                         rows={2}
-                        name={`${key}.excerpt`} 
-                        value={form[key]?.excerpt || ''} 
-                        onChange={handleChange} 
+                        value={form[key]?.excerpt || ''}
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        error={errors[`${key}.excerpt`]}
+                        touched={touched[`${key}.excerpt`]}
                         placeholder="Brief excerpt for this section"
                       />
-                    </Form.Group>
-                  </Accordion.Body>
-                </Accordion.Item>
-              ))}
+                    </Accordion.Body>
+                  </Accordion.Item>
+                );
+              })}
             </Accordion>
           </Tab>
 
           {/* Technologies & Metrics Tab */}
           <Tab eventKey="tech" title={<><i className="fas fa-cogs me-1"></i> Tech & Metrics</>}>
             {/* Technologies */}
-            <h6 className="mb-3">Technologies Used</h6>
+            <div className="d-flex justify-content-between align-items-center mb-3">
+              <h6 className="mb-0">
+                Technologies Used
+                <span className="text-danger ms-1">*</span>
+              </h6>
+              {errors.technologies && (
+                <small className="text-danger">
+                  <i className="fas fa-exclamation-triangle me-1"></i>
+                  {errors.technologies}
+                </small>
+              )}
+            </div>
+            
             <div className="mb-3">
-              {form.technologies.map((tech, index) => (
-                <Badge key={index} bg="primary" className="me-2 mb-2 d-inline-flex align-items-center gap-1">
-                  {tech.icon && <i className={tech.icon}></i>}
-                  {tech.name} ({tech.category})
-                  <i 
-                    className="fas fa-times cursor-pointer" 
-                    onClick={() => removeTechnology(index)}
-                    style={{ cursor: 'pointer' }}
-                  ></i>
-                </Badge>
-              ))}
+              {form.technologies.length === 0 ? (
+                <div className="text-muted p-3 border rounded bg-light">
+                  <i className="fas fa-info-circle me-2"></i>
+                  No technologies added yet. Add at least one technology to continue.
+                </div>
+              ) : (
+                form.technologies.map((tech, index) => (
+                  <Badge key={index} bg="primary" className="me-2 mb-2 d-inline-flex align-items-center gap-1">
+                    {tech.icon && <i className={tech.icon}></i>}
+                    {tech.name} ({tech.category})
+                    <i 
+                      className="fas fa-times cursor-pointer" 
+                      onClick={() => removeTechnology(index)}
+                      style={{ cursor: 'pointer' }}
+                    ></i>
+                  </Badge>
+                ))
+              )}
             </div>
             
             <Row className="mb-3">
@@ -904,23 +1235,44 @@ const CaseStudyForm = ({ selected, onSave, onCancel }) => {
             </Row>
 
             {/* Key Metrics */}
-            <h6 className="mb-3 mt-4">Key Metrics & Results</h6>
+            <div className="d-flex justify-content-between align-items-center mb-3 mt-4">
+              <h6 className="mb-0">
+                Key Metrics & Results
+                {form.status === 'published' && <span className="text-danger ms-1">*</span>}
+              </h6>
+              {errors.metrics && (
+                <small className="text-danger">
+                  <i className="fas fa-exclamation-triangle me-1"></i>
+                  {errors.metrics}
+                </small>
+              )}
+            </div>
+            
             <div className="mb-3">
-              {form.metrics.map((metric, index) => (
-                <div key={index} className="border rounded p-2 mb-2 d-flex justify-content-between align-items-center">
-                  <div>
-                    <strong>{metric.label}:</strong> {metric.value}
-                    {metric.description && <><br/><small className="text-muted">{metric.description}</small></>}
-                  </div>
-                  <Button 
-                    variant="outline-danger" 
-                    size="sm" 
-                    onClick={() => removeMetric(index)}
-                  >
-                    <i className="fas fa-trash"></i>
-                  </Button>
+              {form.metrics.length === 0 ? (
+                <div className="text-muted p-3 border rounded bg-light">
+                  <i className="fas fa-info-circle me-2"></i>
+                  {form.status === 'published' 
+                    ? 'At least one metric is required for published case studies.' 
+                    : 'No metrics added yet. Consider adding metrics to showcase results.'}
                 </div>
-              ))}
+              ) : (
+                form.metrics.map((metric, index) => (
+                  <div key={index} className="border rounded p-2 mb-2 d-flex justify-content-between align-items-center">
+                    <div>
+                      <strong>{metric.label}:</strong> {metric.value}
+                      {metric.description && <><br/><small className="text-muted">{metric.description}</small></>}
+                    </div>
+                    <Button 
+                      variant="outline-danger" 
+                      size="sm" 
+                      onClick={() => removeMetric(index)}
+                    >
+                      <i className="fas fa-trash"></i>
+                    </Button>
+                  </div>
+                ))
+              )}
             </div>
             
             <Row className="mb-3">
@@ -957,60 +1309,60 @@ const CaseStudyForm = ({ selected, onSave, onCancel }) => {
           <Tab eventKey="seo" title={<><i className="fas fa-search me-1"></i> SEO & Meta</>}>
             <Row className="mb-3">
               <Col md={6}>
-                <Form.Group className="mb-3">
-                  <Form.Label>Meta Title</Form.Label>
-                  <Form.Control 
-                    name="seo.metaTitle" 
-                    value={form.seo?.metaTitle || ''} 
-                    onChange={handleChange} 
-                    placeholder="SEO title (60 chars max)"
-                    maxLength={60}
-                  />
-                  <Form.Text className="text-muted">
-                    {(form.seo?.metaTitle || '').length}/60 characters
-                  </Form.Text>
-                </Form.Group>
+                <ValidatedFormControl
+                  name="seo.metaTitle"
+                  label="Meta Title"
+                  value={form.seo?.metaTitle || ''}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  error={errors['seo.metaTitle']}
+                  touched={touched['seo.metaTitle']}
+                  placeholder="SEO title (60 chars max)"
+                  maxLength={60}
+                  helpText={`${(form.seo?.metaTitle || '').length}/60 characters`}
+                />
               </Col>
               <Col md={6}>
-                <Form.Group className="mb-3">
-                  <Form.Label>Open Graph Title</Form.Label>
-                  <Form.Control 
-                    name="seo.ogTitle" 
-                    value={form.seo?.ogTitle || ''} 
-                    onChange={handleChange} 
-                    placeholder="Social media title"
-                  />
-                </Form.Group>
+                <ValidatedFormControl
+                  name="seo.ogTitle"
+                  label="Open Graph Title"
+                  value={form.seo?.ogTitle || ''}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  error={errors['seo.ogTitle']}
+                  touched={touched['seo.ogTitle']}
+                  placeholder="Social media title"
+                />
               </Col>
             </Row>
 
-            <Form.Group className="mb-3">
-              <Form.Label>Meta Description</Form.Label>
-              <Form.Control 
-                as="textarea"
-                rows={3}
-                name="seo.metaDescription" 
-                value={form.seo?.metaDescription || ''} 
-                onChange={handleChange} 
-                placeholder="SEO description (160 chars max)"
-                maxLength={160}
-              />
-              <Form.Text className="text-muted">
-                {(form.seo?.metaDescription || '').length}/160 characters
-              </Form.Text>
-            </Form.Group>
+            <ValidatedFormControl
+              name="seo.metaDescription"
+              label="Meta Description"
+              as="textarea"
+              rows={3}
+              value={form.seo?.metaDescription || ''}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={errors['seo.metaDescription']}
+              touched={touched['seo.metaDescription']}
+              placeholder="SEO description (160 chars max)"
+              maxLength={160}
+              helpText={`${(form.seo?.metaDescription || '').length}/160 characters`}
+            />
 
-            <Form.Group className="mb-3">
-              <Form.Label>Open Graph Description</Form.Label>
-              <Form.Control 
-                as="textarea"
-                rows={2}
-                name="seo.ogDescription" 
-                value={form.seo?.ogDescription || ''} 
-                onChange={handleChange} 
-                placeholder="Social media description"
-              />
-            </Form.Group>
+            <ValidatedFormControl
+              name="seo.ogDescription"
+              label="Open Graph Description"
+              as="textarea"
+              rows={2}
+              value={form.seo?.ogDescription || ''}
+              onChange={handleChange}
+              onBlur={handleBlur}
+              error={errors['seo.ogDescription']}
+              touched={touched['seo.ogDescription']}
+              placeholder="Social media description"
+            />
 
             <Row className="mb-3">
               <Col md={6}>

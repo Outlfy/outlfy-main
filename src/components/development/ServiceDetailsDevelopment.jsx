@@ -13,7 +13,7 @@ const ServiceDetailsDevelopment = () => {
   return (
     <>
       <section className="development__area">
-        <div className="container g-0 line pt-130 pb-150">
+        <div className="container g-0 line pt-130 ">
           <div className="line-3"></div>
           <div className="row">
             <div className="col-xxl-5 col-xl-5 col-lg-5 col-md-5">
@@ -50,7 +50,7 @@ const ServiceDetailsDevelopment = () => {
                 </ul>
               </div>
             </div>
-            <div className="col-xxl-8 col-xl-8 col-lg-8 col-md-8">
+            {/* <div className="col-xxl-8 col-xl-8 col-lg-8 col-md-8">
               <div className="development__img">
                 <Image
                   priority
@@ -72,7 +72,7 @@ const ServiceDetailsDevelopment = () => {
                   className="rounded-lg"
                 />
               </div>
-            </div>
+            </div> */}
           </div>
         </div>
       </section>

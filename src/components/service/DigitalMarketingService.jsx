@@ -14,7 +14,7 @@ const services = [
         Suite
       </>
     ),
-    link: "/ecommerce",
+    link: "https://store.outlfy.com",
     content: [
       "Launch Your All-in-One E-Commerce Empire in 45 Days (or We Work for Free)",
       "Stop paying 3+ vendors for apps, inventory, and delivery. We bundle it all—saving you 40% in costs.",
@@ -37,7 +37,7 @@ const services = [
         Website Developer
       </>
     ),
-    link: "/ecommerce/website",
+    link: "/contact",
     content: [
       "Launch New Website Pages in 1 Click—Pay 0 for Future Updates.",
       "No more $5,000+ dev bills for simple changes.",
@@ -58,7 +58,7 @@ const services = [
         Automation
       </>
     ),
-    link: "/",
+    link: "/contact",
     content: [
       "Automate 500+ Hours/Year of Manual Work",
       "HR, finance, ops—we handle the grunt work.",
@@ -181,7 +181,7 @@ const DigitalMarketingService = () => {
                 <p>
                   After years of building tech for fast-growing businesses, we’ve developed powerful products that solve real problems. If you’re in this space, there’s a high chance we already have the perfect solution for you.
                   <br />
-                  <Link href={"/contact"} className="text-dark-emphasis">
+                  <Link href={"https://calendly.com/gaashish575/free-45-min-consultancy-with-outlfy"} target="_blank" className="text-dark-emphasis">
                   <strong>Book a call — and let’s show you how we can help.</strong>
                   </Link>
                 </p>
@@ -220,12 +220,7 @@ const DigitalMarketingService = () => {
                         </Link>
                       </div>
                     </div>
-                    <div
-                      className="service__hover-3"
-                      style={{
-                        backgroundImage: `url(${service.img})`,
-                      }}
-                    ></div>
+                    
                   </div>
                 ))}
                 <div className="service3__img-wrap">
