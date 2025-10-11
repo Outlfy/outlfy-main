@@ -1,4 +1,6 @@
 import { Metadata } from 'next';
+import { connectDB } from '@/lib/utils/database';
+import { getFeaturedTestimonials } from '@/admin/models/Testimonial';
 
 export const metadata: Metadata = {
   title: 'Outlfy - Tech Partners',
@@ -13,7 +15,25 @@ import DigitalMarketingService from "@/components/service/DigitalMarketingServic
 import DigitalMarketingWorkflow from "@/components/workflow/DigitalMarketingWorkflow";
 import TestimonialGrid from '@/components/testimonials/TestimonialGridHome';
 
-export default function DigitalMarketing() {
+async function hasFeaturedTestimonials(): Promise<boolean> {
+  try {
+    await connectDB();
+    const result = await getFeaturedTestimonials();
+
+    if (!result?.success || !Array.isArray(result.data)) {
+      return false;
+    }
+
+    return result.data.length > 0;
+  } catch (error) {
+    console.error('Error checking featured testimonials:', error);
+    return false;
+  }
+}
+
+export default async function DigitalMarketing() {
+  const showTestimonials = await hasFeaturedTestimonials();
+
   return (
     <main suppressHydrationWarning>
       <RootLayout header="header1" footer="footer1">
@@ -21,7 +41,7 @@ export default function DigitalMarketing() {
         <DigitalMarketingBrand />
         <DigitalMarketingAbout />
         <DigitalMarketingService />
-        <TestimonialGrid/>
+        {showTestimonials && <TestimonialGrid />}
         {/* <DigitalMarketingProtfolio /> */}
         {/* <DigitalMarketingTestimonial /> */}
         <DigitalMarketingWorkflow />

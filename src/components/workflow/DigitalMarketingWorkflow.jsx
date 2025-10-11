@@ -15,7 +15,7 @@ const DigitalMarketingWorkflow = () => {
     if (typeof window !== "undefined") {
       let device_width = window.innerWidth;
       let tHero = gsap.context(() => {
-        if (device_width > 1200) {
+        if (device_width > 1400) {
           var workflow_section_3 = workflowWrapper.current;
           if (workflow_section_3) {
             let duration = 1,
