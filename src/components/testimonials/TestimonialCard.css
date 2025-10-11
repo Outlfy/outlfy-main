@@ -32,10 +32,12 @@
 
 /* Content Styles */
 .testimonial-card__content {
-  overflow-y: auto;
-  margin-bottom: 20px;
-  padding-right: 8px;
-  position: relative;
+    overflow-y: auto;
+    margin-bottom: 20px;
+    padding-right: 8px;
+    position: relative;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none; /* IE and Edge */
 }
 
 .testimonial-card--featured .testimonial-card__content {

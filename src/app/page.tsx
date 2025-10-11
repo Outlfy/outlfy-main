@@ -39,9 +39,9 @@ export default async function DigitalMarketing() {
       <RootLayout header="header1" footer="footer1">
         <DigitalMarketingHero />
         <DigitalMarketingBrand />
+        {showTestimonials && <TestimonialGrid />}
         <DigitalMarketingAbout />
         <DigitalMarketingService />
-        {showTestimonials && <TestimonialGrid />}
         {/* <DigitalMarketingProtfolio /> */}
         {/* <DigitalMarketingTestimonial /> */}
         <DigitalMarketingWorkflow />

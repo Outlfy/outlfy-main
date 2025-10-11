@@ -63,6 +63,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
               ></iframe>
             </div>
           )}
+        
         {/* Scrollable Testimonial Content */}
         <div 
           className="testimonial-card__content"
@@ -100,14 +101,15 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
 
         {/* Hidden Social Links - Show on Hover */}
         <div className="testimonial-card__social">
-          <a 
+          {data.linkedinUrl && data.linkedinUrl !== '' && (
+            <a
             href={data.linkedinUrl} 
             target="_blank" 
             rel="noopener noreferrer"
             className="testimonial-card__social-link"
           >
             <i className="fab fa-linkedin-in"></i>
-          </a>
+          </a>)}
           <a 
             href={data.companySiteUrl} 
             target="_blank" 
@@ -173,6 +175,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
 
       {/* Hidden Social Links - Show on Hover */}
       <div className="testimonial-card__social">
+        {data.linkedinUrl && 
         <a 
           href={data.linkedinUrl} 
           target="_blank" 
@@ -180,7 +183,7 @@ const TestimonialCard: React.FC<TestimonialCardProps> = ({
           className="testimonial-card__social-link"
         >
           <i className="fab fa-linkedin-in"></i>
-        </a>
+        </a>}
         <a 
           href={data.companySiteUrl} 
           target="_blank" 

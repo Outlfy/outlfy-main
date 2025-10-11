@@ -68,7 +68,7 @@ const TestimonialHeroClient = () => {
             <div className="col-xxl-4 col-xl-5 col-lg-6 col-md-6">
               <div className="blog__text">
                 <p>
-                 We partner with founders to build tech backbones that scale businesses. Here's what our clients say - and how their growth stories unfolded.
+                 We partner with businesses across industries — retail, manufacturing, healthcare, logistics, education, and more — helping them replace operational chaos with clarity and control
                 </p>
               </div>
             </div>

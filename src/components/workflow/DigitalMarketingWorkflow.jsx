@@ -15,7 +15,7 @@ const DigitalMarketingWorkflow = () => {
     if (typeof window !== "undefined") {
       let device_width = window.innerWidth;
       let tHero = gsap.context(() => {
-        if (device_width > 1400) {
+        if (device_width > 1200) {
           var workflow_section_3 = workflowWrapper.current;
           if (workflow_section_3) {
             let duration = 1,
@@ -160,7 +160,8 @@ const DigitalMarketingWorkflow = () => {
                       Your Tech Growth, Guaranteed !
                     </h3>
                     <p>
-                      Most businesses waste $10,000+/year on fragmented tools, missed automation, and reactive fixes. Here&apos;s how we fix it:
+                     Most businesses waste $10,000+ a year on disconnected systems, missed automation, and tech that doesn&apos;t speak data — making it hard to take measurable action.
+Here&apos;s how we change that:
                     </p>
                   </div>
                   <ul className="research__tools">
