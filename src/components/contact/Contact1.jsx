@@ -107,7 +107,12 @@ const Contact1 = () => {
                   </li>
                   <li>
                     <span>
-                      Office: 456 Innovation Drive, <br /> San Francisco, CA 94016
+                      UK Office: U16 Umberslade Road, Selly Oak, <br /> Birmingham, B29 7RZ, United Kingdom
+                    </span>
+                  </li>
+                  <li>
+                    <span>
+                      India Office: 2nd Floor, JSV Hyundai Building, CP-53, <br /> Lucknow, UP, India
                     </span>
                   </li>
                   <li>
