@@ -1,6 +1,7 @@
 import { Metadata } from 'next';
 export const dynamic = "force-dynamic";
 export const metadata: Metadata = {
+  alternates: { canonical: '/case-studies' },
   title: 'Case Studies | Outlfy - Successful Digital Transformation Projects',
   description: 'Explore our successful projects and discover how we transform ideas into powerful digital solutions that drive real business growth.',
 };
