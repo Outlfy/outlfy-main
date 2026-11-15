@@ -3,6 +3,7 @@ import { connectDB } from '@/lib/utils/database';
 import { getFeaturedTestimonials } from '@/admin/models/Testimonial';
 
 export const metadata: Metadata = {
+  alternates: { canonical: '/' },
   title: 'Outlfy - Tech Partners',
   description: 'Outlfy helps businesses succeed with custom software development and technology strategy',
 };

@@ -7,6 +7,7 @@ import TestimonialGrid from '@/components/testimonials/TestimonialGrid';
 import TestimonialHero from '@/components/testimonials/TestimonialHero';
 export const dynamic = 'force-dynamic';
 export const metadata: Metadata = {
+  alternates: { canonical: '/testimonials' },
   title: 'Client Testimonials | Outlfy Success Stories',
   description: 'Read what our clients say about Outlfy. Real success stories from businesses we\'ve helped scale with smart strategies and scalable solutions.',
   openGraph: {
@@ -16,7 +17,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: 'https://www.outlfy.com/assets/og-image.jpg',
+        url: 'https://www.outlfy.com/assets/og-image.png',
         width: 1200,
         height: 630,
         alt: 'Outlfy Client Testimonials'
@@ -28,7 +29,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Client Testimonials | Outlfy Success Stories',
     description: 'Read what our clients say about Outlfy. Real success stories from businesses we\'ve helped scale with smart strategies and scalable solutions.',
-    images: ['https://www.outlfy.com/assets/og-image.jpg']
+    images: ['https://www.outlfy.com/assets/og-image.png']
   }
 };
 
